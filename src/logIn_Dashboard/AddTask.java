@@ -21,6 +21,7 @@ public class AddTask extends LogIn_Form implements ActionListener {
     JComboBox projectManager;
     JComboBox projects;
     JComboBox time;
+    
     JComboBox minutes;
     JButton add;
     JButton submit;
