@@ -1,7 +1,6 @@
 package logIn_Dashboard;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.text.html.HTML;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -69,6 +68,10 @@ public class LogIn_Form  {
         passwordText.setBounds(130,80,150,25);
         panel.add(passwordText);
 
+        success = new JLabel("");
+        success.setBounds(50,120,200,30);
+        panel.add(success);
+        
         buttonLogin = new JButton("Login");
         buttonLogin.setBounds(120,150,80,30);
         buttonLogin.setBackground(Color.GREEN);
@@ -81,6 +84,17 @@ public class LogIn_Form  {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");
 					System.out.println("Connection Done");
+					String query = "select * from LogIn_Data where username=? and u_password=?;";
+					PreparedStatement ps = con.prepareStatement(query);
+					ps.setString(1, userText.getText());
+					ps.setString(2, passwordText.getText());
+					ResultSet rs = ps.executeQuery();
+					if(rs.next()) {
+						success.setText("Login Successfull");
+						Thread.sleep(5000);
+						Dashboard d = new Dashboard();
+						frame.dispose();
+					}
 				}catch(Exception e1) {
 					System.out.println(e1);
 				}
@@ -122,10 +136,6 @@ public class LogIn_Form  {
             }
         });
         panel.add(signup);
-
-        success = new JLabel("");
-        success.setBounds(50,120,200,30);
-        panel.add(success);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);

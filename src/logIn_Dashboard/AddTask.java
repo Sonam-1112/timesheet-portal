@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class AddTask extends LogIn_Form implements ActionListener {
+public class AddTask {
     JFrame frame = new JFrame();
     Font font = new Font("",Font.BOLD,20);
     JPanel panel= new JPanel();
@@ -194,6 +194,7 @@ public class AddTask extends LogIn_Form implements ActionListener {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+
 }
 
 
