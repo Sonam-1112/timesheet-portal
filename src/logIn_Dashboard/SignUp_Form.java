@@ -10,8 +10,12 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
-public class SignUp_Form implements ActionListener {
+public class SignUp_Form{
     JFrame frame;
     JPanel panel;
     JLabel newuser;
@@ -63,7 +67,50 @@ public class SignUp_Form implements ActionListener {
         buttonRegister.setBounds(90,230,200,30);
         buttonRegister.setBorderPainted(false);
         buttonRegister.setBackground(Color.GREEN);
-        buttonRegister.addActionListener(this);
+        buttonRegister.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");
+					System.out.println("Connection Done");
+					if(nameText.getText().equals("") || password.getText().equals("") || againpassword.getText().equals(""))
+					{
+						JOptionPane.showMessageDialog(null, "Some field is empty!!!","Alert",JOptionPane.WARNING_MESSAGE);
+					}
+					else if(!(password.getText().equals(againpassword.getText()))) {
+						JOptionPane.showMessageDialog(null, "Password Should be Same!!!","Alert",JOptionPane.WARNING_MESSAGE);
+					}
+					else {
+						String query = "insert into signup_data values(?,?,?);";
+						PreparedStatement ps = con.prepareStatement(query);
+						ps.setString(1, nameText.getText());
+						ps.setString(2, password.getText());
+						ps.setString(3, againpassword.getText());
+						int rs = ps.executeUpdate();
+						if(rs>0) {
+							JOptionPane.showMessageDialog(null, "Registered Successfully...");
+							Dashboard da = new Dashboard();
+							frame.dispose();
+							String q = "insert into login_data values(?,?,?);";
+							PreparedStatement pss = con.prepareStatement(q);
+							pss.setString(1, nameText.getText());
+							pss.setString(2, password.getText());
+							pss.setString(3, againpassword.getText());
+							int result = pss.executeUpdate();
+							if(result>0) {
+								System.out.println("Added");
+							}
+						}	
+					}
+				}catch(Exception e1) {
+					System.out.println(e1);
+				}
+				
+			}
+        	
+        });
         panel.add(buttonRegister);
 
         login = new JLabel("<HTML><U>Already Registered?Login</U></HTML>");
@@ -99,36 +146,16 @@ public class SignUp_Form implements ActionListener {
         });
         panel.add(login);
 
-        success = new JLabel("");
-        success.setBounds(120,190,500,30);
-        success.setForeground(Color.red);
-        success.setFont(new Font("",Font.CENTER_BASELINE,15));
-        panel.add(success);
+//        success = new JLabel("");
+//        success.setBounds(120,190,500,30);
+//        success.setForeground(Color.red);
+//        success.setFont(new Font("",Font.CENTER_BASELINE,15));
+//        panel.add(success);
 
         panel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         panel.setLayout(null);
         frame.add(panel,BorderLayout.CENTER);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==buttonRegister){
-            String user =nameText.getText();
-            String password1 = password.getText();
-            String password2 = againpassword.getText();
-            if(user.equals("") || password1.equals("") || password2.equals("")) {
-                success.setText("Something is Empty??");
-            }
-            else if(!(password1.equals(password2))){
-                success.setText("Password is different???");
-            }
-            else{
-                success.setText("Registered Successfully");
-                Dashboard dashboard = new Dashboard();
-                frame.dispose();
-            }
-        }
     }
 }

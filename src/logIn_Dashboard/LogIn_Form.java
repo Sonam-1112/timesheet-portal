@@ -21,7 +21,7 @@ public class LogIn_Form  {
     JPasswordField passwordText;
     JButton buttonLogin;
     JLabel signup;
-    JLabel success;
+   // JLabel success;
     LogIn_Form(){
         panel = new JPanel();
         frame = new JFrame();
@@ -68,9 +68,9 @@ public class LogIn_Form  {
         passwordText.setBounds(130,80,150,25);
         panel.add(passwordText);
 
-        success = new JLabel("");
-        success.setBounds(50,120,200,30);
-        panel.add(success);
+//        success = new JLabel("");
+//        success.setBounds(50,120,200,30);
+//        panel.add(success);
         
         buttonLogin = new JButton("Login");
         buttonLogin.setBounds(120,150,80,30);
@@ -83,17 +83,19 @@ public class LogIn_Form  {
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");
-					System.out.println("Connection Done");
+					//System.out.println("Connection Done");
 					String query = "select * from LogIn_Data where username=? and u_password=?;";
 					PreparedStatement ps = con.prepareStatement(query);
 					ps.setString(1, userText.getText());
 					ps.setString(2, passwordText.getText());
 					ResultSet rs = ps.executeQuery();
 					if(rs.next()) {
-						success.setText("Login Successfull");
-						Thread.sleep(5000);
+						JOptionPane.showMessageDialog(null, "Login Successful...","Status",JOptionPane.DEFAULT_OPTION);
 						Dashboard d = new Dashboard();
 						frame.dispose();
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Wrong Username or Password!!!","Status",JOptionPane.ERROR_MESSAGE);
 					}
 				}catch(Exception e1) {
 					System.out.println(e1);
