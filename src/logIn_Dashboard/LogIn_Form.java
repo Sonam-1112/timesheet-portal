@@ -18,7 +18,7 @@ public class LogIn_Form  {
     JLabel userLabel;
     static JTextField userText;
     JLabel passwordLabel;
-    static JPasswordField passwordText;
+    JPasswordField passwordText;
     JButton buttonLogin;
     JLabel signup;
    // JLabel success;
@@ -91,7 +91,7 @@ public class LogIn_Form  {
 					ResultSet rs = ps.executeQuery();
 					if(rs.next()) {
 						JOptionPane.showMessageDialog(null, "Login Successful...","Status",JOptionPane.DEFAULT_OPTION);
-						Dashboard d = new Dashboard();
+						Personal p = new Personal();
 						frame.dispose();
 					}
 					else {

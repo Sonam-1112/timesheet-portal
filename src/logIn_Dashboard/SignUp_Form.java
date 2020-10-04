@@ -83,26 +83,36 @@ public class SignUp_Form{
 						JOptionPane.showMessageDialog(null, "Password Should be Same!!!","Alert",JOptionPane.WARNING_MESSAGE);
 					}
 					else {
-						String query = "insert into signup_data values(?,?,?);";
-						PreparedStatement ps = con.prepareStatement(query);
+						String query2 = "Select * from signup_data where s_username=? and s_password=?;";
+						PreparedStatement ps = con.prepareStatement(query2);
 						ps.setString(1, nameText.getText());
 						ps.setString(2, password.getText());
-						ps.setString(3, againpassword.getText());
-						int rs = ps.executeUpdate();
-						if(rs>0) {
-							JOptionPane.showMessageDialog(null, "Registered Successfully...");
-							Dashboard da = new Dashboard();
-							frame.dispose();
-							String q = "insert into login_data values(?,?,?);";
-							PreparedStatement pss = con.prepareStatement(q);
-							pss.setString(1, nameText.getText());
-							pss.setString(2, password.getText());
-							pss.setString(3, againpassword.getText());
-							int result = pss.executeUpdate();
-							if(result>0) {
-								System.out.println("Added");
-							}
-						}	
+						ResultSet rs = ps.executeQuery();
+						if(rs.next()) {
+							JOptionPane.showMessageDialog(null, "Username Already Exists...."+"\n"+"Try Another one...","Status",JOptionPane.WARNING_MESSAGE);
+						}
+						else {
+							String query1 = "insert into signup_data values(?,?,?);";
+							PreparedStatement p = con.prepareStatement(query1);
+							p.setString(1, nameText.getText());
+							p.setString(2, password.getText());
+							p.setString(3, againpassword.getText());
+							int r = p.executeUpdate();
+							if(r>0) {
+								JOptionPane.showMessageDialog(null, "Registered Successfully...");
+								Personal p1 = new Personal();
+								frame.dispose();
+								String q = "insert into login_data values(?,?,?);";
+								PreparedStatement pss = con.prepareStatement(q);
+								pss.setString(1, nameText.getText());
+								pss.setString(2, password.getText());
+								pss.setString(3, againpassword.getText());
+								int result = pss.executeUpdate();
+								if(result>0) {
+									System.out.println("Added");
+								}	
+							}	
+						}
 					}
 				}catch(Exception e1) {
 					System.out.println(e1);

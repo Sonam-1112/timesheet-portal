@@ -212,7 +212,6 @@ public class Personal {
         saveNew.setBounds(50, 350, 170, 30);
         saveNew.setBorderPainted(false);
         saveNew.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -228,27 +227,47 @@ public class Personal {
 					JOptionPane.showMessageDialog(null, "Some field is empty!!!","Alert",JOptionPane.WARNING_MESSAGE);
 				}
 				else {
-//					try {
-//					String title_choice = title_combo.getSelectedItem().toString();
-//					String marital_choice = marital_combo.getSelectedItem().toString();
-//					String query = "insert into personal_deatils values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
-//					PreparedStatement ps = con.prepareStatement(query);
-//					ps.setString(1, LogIn_Form.userText.getText());
-//					ps.setString(2, LogIn_Form.passwordText.getText());
-//					ps.setString(3, select_date.getText());
-//					ps.setString(4, taskname.getText());
-//					ps.setString(5, taskdescription.getText());
-//					ps.setString(6, proM);
-//					ps.setString(7, proN);
-//					ps.setString(8, final_time);
-//					int rs = ps.executeUpdate();
-//					if(rs>0) {
-//						JOptionPane.showMessageDialog(null, "Timesheet Submitted...");
-//					}	
-//					}catch(Exception e1) {
-//						e1.printStackTrace();
-//					}
-//					
+					String value1 = LogIn_Form.userText.getText() ;
+					String value2 = title_combo.getSelectedItem().toString();
+					String value3 = name_text.getText();
+					String value4 = email_text.getText();
+					String value5 = address_text.getText();
+					String value6 = country_text.getText();
+					String value7 = phone_text.getText();
+					String value8 = ID_text.getText();
+					String value9 = bank_text.getText();
+					String value10 = dob_text.getText();
+					String value11 = palce_birth_text.getText();
+					String value12 = nationality_text.getText();
+					String value13 = marital_combo.getSelectedItem().toString();
+					String value14 = personal_ID_text.getText();
+					String value15 = SSN_text.getText();
+					try {
+					String query = "insert into personal_deatils values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+					PreparedStatement ps = con.prepareStatement(query);
+					ps.setString(1, value1);
+					ps.setString(2, value2);
+					ps.setString(3, value3);
+					ps.setString(4, value4);
+					ps.setString(5, value5);
+					ps.setString(6, value6);
+					ps.setString(7, value7);
+					ps.setString(8, value8);
+					ps.setString(9, value9);
+					ps.setString(10, value10);
+					ps.setString(11, value11);
+					ps.setString(12, value12);
+					ps.setString(13, value13);
+					ps.setString(14, value14);
+					ps.setString(15, value15);
+					int rs = ps.executeUpdate();
+					if(rs>0) {
+						JOptionPane.showMessageDialog(null, "Details Stored Successfully...");
+					}	
+					}catch(Exception e1) {
+						e1.printStackTrace();
+					}
+		
 				  }
 				} catch (ClassNotFoundException | SQLException e2) {
 					e2.printStackTrace();
@@ -269,8 +288,41 @@ public class Personal {
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");	
-					
-					
+					if(name_text.getText().equals("")  || email_text.getText().equals("") || 
+							address_text.getText().equals("") || country_text.getText().equals("") ||
+							phone_text.getText().equals("") || ID_text.getText().equals("") ||
+							bank_text.getText().equals("") || dob_text.getText().equals("") ||
+							palce_birth_text.getText().equals("") || nationality_text.getText().equals("") ||
+							personal_ID_text.getText().equals("") || SSN_text.getText().equals(""))
+						{
+							JOptionPane.showMessageDialog(null, "Some field is empty!!!","Alert",JOptionPane.WARNING_MESSAGE);
+						}
+					else {
+					String value1 = LogIn_Form.userText.getText() ;
+					//String value2 = LogIn_Form.passwordText.getText();
+					String value3 = title_combo.getSelectedItem().toString();
+					String value4 = name_text.getText();
+					String value5 = email_text.getText();
+					String value6 = address_text.getText();
+					String value7 = country_text.getText();
+					String value8 = phone_text.getText();
+					String value9 = ID_text.getText();
+					String value10 = bank_text.getText();
+					String value11 = dob_text.getText();
+					String value12 = palce_birth_text.getText();
+					String value13 = nationality_text.getText();
+					String value14 = marital_combo.getSelectedItem().toString();
+					String value15 = personal_ID_text.getText();
+					String value16 = SSN_text.getText();
+					String query = "update personal_deatils set user_name ='"+value1+"',title='"+value3+"'"
+									+ ",employee_name='"+value4+"',email='"+value5+"',address='"+value6+"',country='"+value7+"',phone_no='"+value8+"'"
+									+ ",Office_ID_No='"+value9+"',Bank_acc_no='"+value10+"',DOB='"+value11+"',Place_of_birth='"+value12+"'"
+									+ ",Natioanlity='"+value13+"',Marital_Status='"+value14+"',Personal_ID_No='"+value15+"',SSN='"+value16+"'"
+									+ "where user_name ='"+value1+"';";
+					PreparedStatement ps = con.prepareStatement(query);
+					ps.execute();
+					JOptionPane.showMessageDialog(null, "Updated Successfully","Confirmation",JOptionPane.DEFAULT_OPTION);
+					}
 				}catch(Exception e1) {
 					System.out.println(e1);
 				}

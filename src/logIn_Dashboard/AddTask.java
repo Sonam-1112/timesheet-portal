@@ -24,9 +24,9 @@ public class AddTask{
     JButton select;
     JComboBox projectManager;
     JComboBox projects;
-    JComboBox time;
+    JTextField time;
     
-    JComboBox minutes;
+    JTextField minutes;
     JButton add;
     JButton submit;
     AddTask(){
@@ -157,18 +157,110 @@ public class AddTask{
         projects.setBounds(815,30,300,40);
         panel.add(projects);
 
-        String t[] = { "Hours","3", "4", "5", "6", "7","8","9","10"};
+       // String t[] = { "Hours","3", "4", "5", "6", "7","8","9","10"};
 
-        time = new JComboBox(t);
+        time = new JTextField(5);
         time.setBackground(Color.white);
         time.setBounds(1120,30,75,40);
+        time.setFont(new Font("Times New Roman",Font.PLAIN,20));
+        time.setText("Hours");
+        time.addFocusListener(new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(time.getText().equals("Hours")) {
+					time.setText("");
+				}
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(time.getText().equals("")) {
+					time.setText("Hours");
+				}
+			}
+        	
+        });
+        time.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				//String value = time.getText();
+				if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9') {
+		               time.setEditable(true);
+		            } else {
+		               time.setEditable(false);
+		               JOptionPane.showMessageDialog(null, "Enter only numeric digits(0-9)");
+		               time.setEditable(true);
+		            }
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+        	
+        });
         panel.add(time);
 
-        String t1[] = { "Minutes","10", "15","20","25" ,"30","35", "40","45","50","55"};
+        //String t1[] = { "Minutes","10", "15","20","25" ,"30","35", "40","45","50","55"};
 
-        minutes = new JComboBox(t1);
+        minutes = new JTextField(5);
         minutes.setBackground(Color.white);
         minutes.setBounds(1200,30,75,40);
+        minutes.setFont(new Font("Times New Roman",Font.PLAIN,20));
+        minutes.setText("Minutes");
+        minutes.addFocusListener(new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(minutes.getText().equals("Minutes")) {
+					minutes.setText("");
+				}
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(minutes.getText().equals("")) {
+					minutes.setText("Minutes");
+				}
+					
+			}
+        	
+        });
+        minutes.addKeyListener(new KeyListener(){
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				//String value = minutes.getText();
+				if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9') {
+					minutes.setEditable(true);
+		            } else {
+		            	minutes.setEditable(false);
+		               JOptionPane.showMessageDialog(null, "Enter only numeric digits(0-9)");
+		               minutes.setEditable(true);
+		            }
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+        });
         panel.add(minutes);
 
 //        add = new JButton("Add Event");
@@ -201,8 +293,8 @@ public class AddTask{
 					taskdescription.getText().equals("Task Description") ||
 					projectManager.getSelectedItem().equals("Project Manager") || 
 					projects.getSelectedItem().equals("Project Manager") ||
-					time.getSelectedItem().equals("Hours") || 
-					minutes.getSelectedItem().equals("Minutes"))
+					time.getText().equals("Hours") || 
+					minutes.getText().equals("Minutes"))
 				{
 					JOptionPane.showMessageDialog(null, "Some field is empty!!!","Alert",JOptionPane.WARNING_MESSAGE);
 				}
@@ -210,17 +302,17 @@ public class AddTask{
 					try {
 					String proM = projectManager.getSelectedItem().toString();
 					String proN = projects.getSelectedItem().toString();
-					String final_time = time.getSelectedItem().toString() + ":" + minutes.getSelectedItem().toString();
+					String final_time = time.getText().toString() + ":" + minutes.getText().toString();
 					String query = "insert into add_task values(?,?,?,?,?,?,?,?);";
 					PreparedStatement ps = con.prepareStatement(query);
 					ps.setString(1, LogIn_Form.userText.getText());
-					ps.setString(2, LogIn_Form.passwordText.getText());
-					ps.setString(3, select_date.getText());
-					ps.setString(4, taskname.getText());
-					ps.setString(5, taskdescription.getText());
-					ps.setString(6, proM);
-					ps.setString(7, proN);
-					ps.setString(8, final_time);
+					//ps.setString(2, LogIn_Form.passwordText.getText());
+					ps.setString(2, select_date.getText());
+					ps.setString(3, taskname.getText());
+					ps.setString(4, taskdescription.getText());
+					ps.setString(5, proM);
+					ps.setString(6, proN);
+					ps.setString(7, final_time);
 					int rs = ps.executeUpdate();
 					if(rs>0) {
 						JOptionPane.showMessageDialog(null, "Timesheet Submitted...");

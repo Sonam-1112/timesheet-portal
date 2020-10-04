@@ -19,28 +19,28 @@ public class CommonMenu {
         JMenuBar menuBar = new JMenuBar();
         menuBar.setOpaque(true);
         menuBar.setBackground(Color.CYAN);
-        JMenu dashboard = new JMenu("Dashboard");
+        //JMenu dashboard = new JMenu("Dashboard");
         JMenu person = new JMenu("Personal Details");
         JMenu task = new JMenu("Task");
         JMenu logout = new JMenu("Logout");
 
-        dashboard.addMenuListener(new MenuListener() {
-            @Override
-            public void menuSelected(MenuEvent e) {
-                f.setVisible(false);
-                Dashboard d = new Dashboard();
-            }
-
-            @Override
-            public void menuDeselected(MenuEvent e) {
-
-            }
-
-            @Override
-            public void menuCanceled(MenuEvent e) {
-
-            }
-        });
+//        dashboard.addMenuListener(new MenuListener() {
+//            @Override
+//            public void menuSelected(MenuEvent e) {
+//                f.setVisible(false);
+//                Dashboard d = new Dashboard();
+//            }
+//
+//            @Override
+//            public void menuDeselected(MenuEvent e) {
+//
+//            }
+//
+//            @Override
+//            public void menuCanceled(MenuEvent e) {
+//
+//            }
+//        });
 
         person.addMenuListener(new MenuListener() {
             @Override
@@ -112,7 +112,7 @@ public class CommonMenu {
         task.addSeparator();
         task.add(view_task);
 
-        menuBar.add(dashboard);
+        //menuBar.add(dashboard);
         menuBar.add(task);
         menuBar.add(person);
         menuBar.add(logout);
