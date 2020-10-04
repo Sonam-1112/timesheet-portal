@@ -27,7 +27,7 @@ public class SignUp_Form{
     JPasswordField againpassword;
     JButton buttonRegister;
     JLabel login;
-    JLabel success;
+    //JLabel success;
     SignUp_Form(){
         frame = new JFrame();
         panel = new JPanel();

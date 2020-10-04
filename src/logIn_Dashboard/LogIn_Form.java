@@ -16,9 +16,9 @@ public class LogIn_Form  {
     JLabel heading;
     Font font = new Font("",Font.BOLD,30);
     JLabel userLabel;
-    JTextField userText;
+    static JTextField userText;
     JLabel passwordLabel;
-    JPasswordField passwordText;
+    static JPasswordField passwordText;
     JButton buttonLogin;
     JLabel signup;
    // JLabel success;

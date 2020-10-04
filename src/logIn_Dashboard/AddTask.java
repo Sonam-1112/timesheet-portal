@@ -6,9 +6,13 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 
-public class AddTask {
+public class AddTask{
     JFrame frame = new JFrame();
     Font font = new Font("",Font.BOLD,20);
     JPanel panel= new JPanel();
@@ -16,7 +20,7 @@ public class AddTask {
 //    JScrollPane sc;
     JTextField taskname;
     JTextArea taskdescription;
-    JTextField date;
+    JTextField select_date;
     JButton select;
     JComboBox projectManager;
     JComboBox projects;
@@ -77,10 +81,10 @@ public class AddTask {
 //        panel_5.setLayout(null);
 
 
-        date=  new JTextField();
-        date.setEditable(false);
-        date.setBounds(50,60,150,30);
-        panel.add(date);
+        select_date=  new JTextField();
+        select_date.setEditable(false);
+        select_date.setBounds(50,60,150,30);
+        panel.add(select_date);
 
         select = new JButton("Select Date");
         select.setBorderPainted(false);
@@ -89,7 +93,7 @@ public class AddTask {
         select.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                date.setText(new DatePicker(frame).setPickedDate());
+                select_date.setText(new DatePicker(frame).setPickedDate());
             }
         });
         panel.add(select);
@@ -134,33 +138,37 @@ public class AddTask {
         taskdescription.setLineWrap(true);
         panel.add(taskdescription);
 
-        String s1[] = { "Project Manager", "Mumbai", "Noida", "Kolkata", "New Delhi" };
+        String s1[] = { "Project Manager     ","Sonakshi Patil","Dinesh Gupta","Sanjeevani More","Anita Chawla",
+        				"Swarali Patil","Yashraj Mishra","Vinod Deshmukh","Ashok Mehta" };
 
         projectManager= new JComboBox(s1);
         projectManager.setBackground(Color.white);
-        projectManager.setBounds(560,30,200,40);
+        projectManager.setBounds(560,30,250,40);
         //projectManager.addItemListener((ItemListener) this);
         panel.add(projectManager);
 
-        String s2[] = { "Projects   ", "Mumbai", "Noida", "Kolkata", "New Delhi" };
+        String s2[] = { "Projects   		", "Android task monitoring.","Sentiment analysis for product rating.",
+	        		"Fingerprint-based ATM system.","Advanced employee management system.",
+	        		"Image encryption using AES algorithm.","Fingerprint voting system.",
+	        		"Weather forecasting system.","Android local train ticketing system." };
 
         projects = new JComboBox(s2);
         projects.setBackground(Color.white);
-        projects.setBounds(765,30,150,40);
+        projects.setBounds(815,30,300,40);
         panel.add(projects);
 
         String t[] = { "Hours","3", "4", "5", "6", "7","8","9","10"};
 
         time = new JComboBox(t);
         time.setBackground(Color.white);
-        time.setBounds(920,30,75,40);
+        time.setBounds(1120,30,75,40);
         panel.add(time);
 
         String t1[] = { "Minutes","10", "15","20","25" ,"30","35", "40","45","50","55"};
 
         minutes = new JComboBox(t1);
         minutes.setBackground(Color.white);
-        minutes.setBounds(1000,30,75,40);
+        minutes.setBounds(1200,30,75,40);
         panel.add(minutes);
 
 //        add = new JButton("Add Event");
@@ -181,7 +189,55 @@ public class AddTask {
         submit.setBorderPainted(false);
         submit.setBackground(Color.BLUE);
         submit.setFont(font);
-        submit.setBounds(1080,80,250,30);
+        submit.setBounds(1080,85,250,30);
+        submit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");	
+				if(select_date.getText().equals("")  || taskname.getText().equals("Task Name") || 
+					taskdescription.getText().equals("Task Description") ||
+					projectManager.getSelectedItem().equals("Project Manager") || 
+					projects.getSelectedItem().equals("Project Manager") ||
+					time.getSelectedItem().equals("Hours") || 
+					minutes.getSelectedItem().equals("Minutes"))
+				{
+					JOptionPane.showMessageDialog(null, "Some field is empty!!!","Alert",JOptionPane.WARNING_MESSAGE);
+				}
+				else {
+					try {
+					String proM = projectManager.getSelectedItem().toString();
+					String proN = projects.getSelectedItem().toString();
+					String final_time = time.getSelectedItem().toString() + ":" + minutes.getSelectedItem().toString();
+					String query = "insert into add_task values(?,?,?,?,?,?,?,?);";
+					PreparedStatement ps = con.prepareStatement(query);
+					ps.setString(1, LogIn_Form.userText.getText());
+					ps.setString(2, LogIn_Form.passwordText.getText());
+					ps.setString(3, select_date.getText());
+					ps.setString(4, taskname.getText());
+					ps.setString(5, taskdescription.getText());
+					ps.setString(6, proM);
+					ps.setString(7, proN);
+					ps.setString(8, final_time);
+					int rs = ps.executeUpdate();
+					if(rs>0) {
+						JOptionPane.showMessageDialog(null, "Timesheet Submitted...");
+					}	
+					}catch(Exception e1) {
+						e1.printStackTrace();
+					}
+					
+				  }
+				} catch (ClassNotFoundException e2) {
+					e2.printStackTrace();
+				} catch (SQLException e2) {
+					e2.printStackTrace();
+				}
+			}
+        	
+        });
         panel.add(submit);
 
 
