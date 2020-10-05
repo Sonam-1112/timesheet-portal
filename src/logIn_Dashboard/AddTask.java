@@ -304,7 +304,7 @@ public class AddTask{
 					String proM = projectManager.getSelectedItem().toString();
 					String proN = projects.getSelectedItem().toString();
 					String final_time = time.getText().toString() + ":" + minutes.getText().toString();
-					String query = "insert into add_task values(?,?,?,?,?,?,?,?);";
+					String query = "insert into add_task values(?,?,?,?,?,?,?);";
 					PreparedStatement ps = con.prepareStatement(query);
 					ps.setString(1, LogIn_Form.userText.getText());
 					//ps.setString(2, LogIn_Form.passwordText.getText());

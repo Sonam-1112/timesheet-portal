@@ -25,6 +25,7 @@ public class EditTask {
     JButton show;
     JTable table;
     JButton save;
+    JButton delete;
     EditTask(){
         frame.setJMenuBar(CommonMenu.displayMenu(frame));
         frame.setLayout(null);
@@ -121,6 +122,15 @@ public class EditTask {
         save.setBounds(550,30,250,30);
         panel.add(save); 
        
+        delete = new JButton("Delete Task");
+        delete.setForeground(Color.WHITE);
+        delete.setBorderPainted(false);
+        delete.setBackground(Color.BLUE);
+        delete.setFont(font);
+        delete.setBounds(850,30,250,30);
+        panel.add(delete); 
+        
+        
         table = new JTable();
         Object[] row = new Object[6];
         //Object[] columns = {"Date","Task Name","Task Description","Project Manager","Project Name","Time"};
