@@ -25,6 +25,8 @@ public class SignUp_Form{
     JTextField nameText;
     JPasswordField password;
     JPasswordField againpassword;
+    JLabel role;
+    JComboBox role_combo;
     JButton buttonRegister;
     JLabel login;
     //JLabel success;
@@ -55,7 +57,7 @@ public class SignUp_Form{
         password.setBounds(180,100,165,25);
         panel.add(password);
 
-        confirmpassword =new JLabel(" Confirm Password");
+        confirmpassword =new JLabel("Confirm Password");
         confirmpassword.setBounds(30,150,150,25);
         panel.add(confirmpassword);
 
@@ -63,8 +65,19 @@ public class SignUp_Form{
         againpassword.setBounds(180,150,165,25);
         panel.add(againpassword);
 
+        role = new  JLabel("Role");
+        role.setBounds(30,200, 100, 25);
+        panel.add(role);
+        
+        String role_option[] = {"Employee","Manager"};
+        
+        role_combo = new JComboBox(role_option);
+        role_combo.setBackground(Color.white);
+        role_combo.setBounds(180, 200, 100, 25);
+        panel.add(role_combo);
+        
         buttonRegister = new JButton("Register Now");
-        buttonRegister.setBounds(90,230,200,30);
+        buttonRegister.setBounds(90,250,200,30);
         buttonRegister.setBorderPainted(false);
         buttonRegister.setBackground(Color.GREEN);
         buttonRegister.addActionListener(new ActionListener() {
@@ -92,21 +105,23 @@ public class SignUp_Form{
 							JOptionPane.showMessageDialog(null, "Username Already Exists...."+"\n"+"Try Another one...","Status",JOptionPane.WARNING_MESSAGE);
 						}
 						else {
-							String query1 = "insert into signup_data values(?,?,?);";
+							String query1 = "insert into signup_data values(?,?,?,?);";
 							PreparedStatement p = con.prepareStatement(query1);
 							p.setString(1, nameText.getText());
 							p.setString(2, password.getText());
 							p.setString(3, againpassword.getText());
+							p.setString(4, role_combo.getSelectedItem().toString());
 							int r = p.executeUpdate();
 							if(r>0) {
 								JOptionPane.showMessageDialog(null, "Registered Successfully...");
 								Personal p1 = new Personal();
 								frame.dispose();
-								String q = "insert into login_data values(?,?,?);";
+								String q = "insert into login_data values(?,?,?,?);";
 								PreparedStatement pss = con.prepareStatement(q);
 								pss.setString(1, nameText.getText());
 								pss.setString(2, password.getText());
 								pss.setString(3, againpassword.getText());
+								pss.setString(4, role_combo.getSelectedItem().toString());
 								int result = pss.executeUpdate();
 								if(result>0) {
 									System.out.println("Added");
@@ -126,7 +141,7 @@ public class SignUp_Form{
         login = new JLabel("<HTML><U>Already Registered?Login</U></HTML>");
         login.setForeground(Color.RED);
         login.setFont(new Font("Times New Roman",Font.ITALIC,15));
-        login.setBounds(110,270,220,20);
+        login.setBounds(110,300,220,20);
         login.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {

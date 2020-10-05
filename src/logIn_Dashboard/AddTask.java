@@ -83,6 +83,7 @@ public class AddTask{
 
         select_date=  new JTextField();
         select_date.setEditable(false);
+        select_date.setBackground(Color.WHITE);
         select_date.setBounds(50,60,150,30);
         panel.add(select_date);
 

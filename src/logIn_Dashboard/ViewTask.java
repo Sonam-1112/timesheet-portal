@@ -65,7 +65,7 @@ public class ViewTask {
         View = new JButton("View Task");
         View.setBackground(Color.BLUE);
         View.setBorderPainted(false);
-        View.setBounds(380,25,150,30);
+        View.setBounds(380,35,150,30);
         View.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

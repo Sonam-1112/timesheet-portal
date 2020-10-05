@@ -113,8 +113,8 @@ public class CommonMenu {
         task.add(view_task);
 
         //menuBar.add(dashboard);
-        menuBar.add(task);
         menuBar.add(person);
+        menuBar.add(task);
         menuBar.add(logout);
 
         f.setExtendedState(JFrame.MAXIMIZED_BOTH);
