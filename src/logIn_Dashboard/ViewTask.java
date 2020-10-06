@@ -80,7 +80,12 @@ public class ViewTask {
         View.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+//            	if(datestart.getText().compareTo(dateend.getText())>0) {
+//            		JOptionPane.showMessageDialog(null, "Please Choose Correct Date!!!","Suggestion",JOptionPane.PLAIN_MESSAGE);;
+//            	}
+//            	else {
             		showTask();
+//            	}
             }
         });
         panel.add(View);
@@ -137,14 +142,15 @@ public class ViewTask {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");
 		viewUserData user;
-    	String query = "select * from add_task where user_name=?;";
+    	String query = "select * from add_task where user_name=? and selected_date>=? and selected_date<=?;";
     	PreparedStatement ps = con.prepareStatement(query);
     	ps.setString(1, LogIn_Form.userText.getText());
+    	ps.setString(2, datestart.getText());
+    	ps.setString(3, dateend.getText());
     	ResultSet rs = ps.executeQuery();
     	while(rs.next()) {
     		 user = new viewUserData(rs.getString("user_name"),rs.getString("selected_date"),rs.getString("task_name"),rs.getString("task_description")
     				 				 ,rs.getString("project_manager"),rs.getString("project_name"),rs.getString("time_spent"));
-    		 System.out.println(user+"while");
     		 tasksList.add(user);
     	}
     	}catch(Exception e1) {
@@ -165,7 +171,6 @@ public class ViewTask {
     		row[4]=list.get(i).getproject_name();
     		row[5]=list.get(i).gettime_spent();
     		model.addRow(row);
-    		System.out.println("HEllo");
     	}
     }
     

@@ -8,6 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class EditTask {
     JFrame frame = new JFrame("Edit Tasks");
@@ -15,13 +20,8 @@ public class EditTask {
     Font font = new Font("",Font.BOLD,20);
     JButton selectdate = new JButton("Select Date");
     JTextField dateText = new  JTextField();
-//    JTextField taskname;
-//    JTextArea taskdescription;
-//    JComboBox projectManager;
-//    JComboBox projects;
-//    JComboBox time;
-//    JComboBox minutes;
-//    JButton add;
+    DefaultTableModel model;
+    Object[] row;
     JButton show;
     JTable table;
     JButton save;
@@ -50,61 +50,6 @@ public class EditTask {
             }
         });
         panel.add(selectdate);
-
-//        taskname = new JTextField();
-//        taskname.setBounds(50,100,300,30);
-//        taskname.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
-//        panel.add(taskname);
-//
-//        taskdescription = new JTextArea(20,100);
-//        taskdescription.setBounds(355,100,200,100);
-//        taskdescription.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
-//        taskdescription.setLineWrap(true);
-//        panel.add(taskdescription);
-//
-//        String s1[] = { "Project Manager", "Mumbai", "Noida", "Kolkata", "New Delhi" };
-//
-//        projectManager= new JComboBox(s1);
-//        projectManager.setBackground(Color.white);
-//        projectManager.setBounds(560,100,200,40);
-//        //projectManager.addItemListener((ItemListener) this);
-//        panel.add(projectManager);
-//
-//        String s2[] = { "Projects   ", "Mumbai", "Noida", "Kolkata", "New Delhi" };
-//
-//        projects = new JComboBox(s2);
-//        projects.setBackground(Color.white);
-//        projects.setBounds(765,100,150,40);
-//        panel.add(projects);
-//
-//        String t[] = { "Hours","3", "4", "5", "6", "7","8","9","10"};
-//
-//        time = new JComboBox(t);
-//        time.setBackground(Color.white);
-//        time.setBounds(920,100,75,40);
-//        panel.add(time);
-//
-//        String t1[] = { "Minutes","10", "15","20","25" ,"30","35", "40","45","50","55"};
-//
-//        minutes = new JComboBox(t1);
-//        minutes.setBackground(Color.white);
-//        minutes.setBounds(1000,100,75,40);
-//        panel.add(minutes);
-//
-//        add = new JButton("Add Event");
-//        add.setFont(font);
-//        add.setBorderPainted(false);
-//        add.setForeground(Color.RED);
-//        add.setBackground(Color.green);
-//        add.setBounds(1080,100,150,30);
-//        add.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//            }
-//        });
-//        panel.add(add);
-
-        
         
         show = new JButton("Show Task");
         show.setForeground(Color.WHITE);
@@ -112,6 +57,14 @@ public class EditTask {
         show.setBackground(Color.BLUE);
         show.setFont(font);
         show.setBounds(250,30,250,30);
+        show.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				showTask();
+			}
+        	
+        });
         panel.add(show);
 
         save = new JButton("Save Changes");
@@ -120,6 +73,15 @@ public class EditTask {
         save.setBackground(Color.BLUE);
         save.setFont(font);
         save.setBounds(550,30,250,30);
+        save.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+        	
+        });
         panel.add(save); 
        
         delete = new JButton("Delete Task");
@@ -132,10 +94,10 @@ public class EditTask {
         
         
         table = new JTable();
-        Object[] row = new Object[6];
+        row = new Object[6];
         //Object[] columns = {"Date","Task Name","Task Description","Project Manager","Project Name","Time"};
         table.setBounds(20,100,1450,650);
-        DefaultTableModel model = new DefaultTableModel();
+        model = new DefaultTableModel();
         table.setModel(model);
         model.addColumn("Date");
         model.addColumn("Task Name");
@@ -166,11 +128,47 @@ public class EditTask {
         panel.add(pane);
         panel.add(table);
         
-
-
         frame.add(panel);
         frame.setBackground(Color.pink);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+    public ArrayList<editUserData> taskList(){
+    	ArrayList<editUserData> tasksList = new ArrayList<>();
+    	try {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");
+		editUserData user;
+    	String query = "select * from add_task where user_name=? and selected_date=?;";
+    	PreparedStatement ps = con.prepareStatement(query);
+    	ps.setString(1, LogIn_Form.userText.getText());
+    	ps.setString(2, dateText.getText());
+    	ResultSet rs = ps.executeQuery();
+    	while(rs.next()) {
+    		 user = new editUserData(rs.getString("user_name"),rs.getString("selected_date"),rs.getString("task_name"),rs.getString("task_description")
+    				 				 ,rs.getString("project_manager"),rs.getString("project_name"),rs.getString("time_spent"));
+    		 tasksList.add(user);
+    	}
+    	}catch(Exception e1) {
+    		System.out.println(e1);
+    	}
+		System.out.println(tasksList+","+LogIn_Form.userText.getText());
+		return tasksList;
+    	
+    }
+    
+    public void showTask() {
+    	ArrayList<editUserData> list = taskList();
+    	for(int i=0;i<list.size();i++) {
+    		row[0]=list.get(i).getselected_date();
+    		row[1]=list.get(i).gettask_name();
+    		row[2]=list.get(i).gettask_description();
+    		row[3]=list.get(i).getproject_manager();
+    		row[4]=list.get(i).getproject_name();
+    		row[5]=list.get(i).gettime_spent();
+    		model.addRow(row);
+    	}
+    }
+    
+    
 }

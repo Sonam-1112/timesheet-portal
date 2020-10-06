@@ -300,7 +300,7 @@ public class Personal {
 							palce_birth_text.getText().equals("") || nationality_text.getText().equals("") ||
 							personal_ID_text.getText().equals("") || SSN_text.getText().equals(""))
 						{
-							JOptionPane.showMessageDialog(null, "Some field is empty!!!","Alert",JOptionPane.WARNING_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Some field is empty!!!","Warning",JOptionPane.WARNING_MESSAGE);
 						}
 					else {
 						String value1 = LogIn_Form.userText.getText() ;
@@ -370,7 +370,6 @@ public class Personal {
 					marital_combo.setSelectedItem(rs.getString("Marital_Status"));
 					personal_ID_text.setText(rs.getString("Personal_ID_No"));
 					SSN_text.setText(rs.getString("SSN"));
-			
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "Fill all the details...");

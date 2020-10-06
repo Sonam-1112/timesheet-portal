@@ -87,7 +87,6 @@ public class SignUp_Form{
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");
-					System.out.println("Connection Done");
 					if(nameText.getText().equals("") || password.getText().equals("") || againpassword.getText().equals(""))
 					{
 						JOptionPane.showMessageDialog(null, "Some field is empty!!!","Alert",JOptionPane.WARNING_MESSAGE);
@@ -96,13 +95,12 @@ public class SignUp_Form{
 						JOptionPane.showMessageDialog(null, "Password Should be Same!!!","Alert",JOptionPane.WARNING_MESSAGE);
 					}
 					else {
-						String query2 = "Select * from signup_data where s_username=? and s_password=?;";
+						String query2 = "Select * from signup_data where s_username=?;";
 						PreparedStatement ps = con.prepareStatement(query2);
 						ps.setString(1, nameText.getText());
-						ps.setString(2, password.getText());
 						ResultSet rs = ps.executeQuery();
 						if(rs.next()) {
-							JOptionPane.showMessageDialog(null, "Username Already Exists...."+"\n"+"Try Another one...","Status",JOptionPane.WARNING_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Username Already Exists...."+"\n"+"Try Another one...","Warning",JOptionPane.WARNING_MESSAGE);
 						}
 						else {
 							String query1 = "insert into signup_data values(?,?,?,?);";
