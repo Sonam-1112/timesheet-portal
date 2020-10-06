@@ -317,6 +317,8 @@ public class AddTask{
 					int rs = ps.executeUpdate();
 					if(rs>0) {
 						JOptionPane.showMessageDialog(null, "Timesheet Submitted...");
+						AddTask a = new AddTask();
+						frame.dispose();
 					}	
 					}catch(Exception e1) {
 						e1.printStackTrace();
