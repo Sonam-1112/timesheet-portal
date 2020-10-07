@@ -90,6 +90,32 @@ public class EditTask {
         delete.setBackground(Color.BLUE);
         delete.setFont(font);
         delete.setBounds(850,30,250,30);
+        delete.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int row = table.getSelectedRow();
+				model.removeRow(row);
+		        String eve1 = table.getModel().getValueAt(row, 0).toString();
+		        String eve2= table.getModel().getValueAt(row, 0).toString();
+		        
+		      //  String delRow = "delete from add_task where user_name =? and selected_date=?;";
+		        try {
+		    		Class.forName("com.mysql.cj.jdbc.Driver");
+		    		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");
+		        	String query ="delete from add_task where user_name=? and selected_date=? and ;";
+		        	PreparedStatement ps = con.prepareStatement(query);
+		        	ps.setString(1, LogIn_Form.userText.getText());
+		        	ps.setString(2, eve1);
+		        	ps.setString(3, eve2);
+		        	ps.executeUpdate();
+		        	
+		        	}catch(Exception e1) {
+		        		System.out.println(e1);
+		        	}
+			}
+        	
+        });
         panel.add(delete); 
         
         

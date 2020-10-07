@@ -90,7 +90,7 @@ public class LogIn_Form  {
 					ps.setString(2, passwordText.getText());
 					ResultSet rs = ps.executeQuery();
 					if(rs.next()) {
-						JOptionPane.showMessageDialog(null, "Login Successful...","Status",JOptionPane.DEFAULT_OPTION);
+						//JOptionPane.showMessageDialog(null, "Login Successful...","Status",JOptionPane.DEFAULT_OPTION);
 						Personal p = new Personal();
 						frame.dispose();
 					}
