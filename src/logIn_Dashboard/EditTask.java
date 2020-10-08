@@ -95,19 +95,26 @@ public class EditTask {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int row = table.getSelectedRow();
-				model.removeRow(row);
-		        String eve1 = table.getModel().getValueAt(row, 0).toString();
-		        String eve2= table.getModel().getValueAt(row, 0).toString();
-		        
+		        String col1 = table.getModel().getValueAt(row, 0).toString();
+		        String col2 = table.getModel().getValueAt(row, 1).toString();
+		        String col3 = table.getModel().getValueAt(row, 2).toString();
+		        String col4 = table.getModel().getValueAt(row, 3).toString();
+		        String col5 = table.getModel().getValueAt(row, 4).toString();
+		        String col6 = table.getModel().getValueAt(row, 5).toString();
+		        model.removeRow(row);
 		      //  String delRow = "delete from add_task where user_name =? and selected_date=?;";
 		        try {
 		    		Class.forName("com.mysql.cj.jdbc.Driver");
 		    		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");
-		        	String query ="delete from add_task where user_name=? and selected_date=? and ;";
+		        	String query ="delete from add_task where user_name=? and selected_date=? and task_name=? and task_description=? and project_manager=? and project_name=? and time_spent=?;";
 		        	PreparedStatement ps = con.prepareStatement(query);
 		        	ps.setString(1, LogIn_Form.userText.getText());
-		        	ps.setString(2, eve1);
-		        	ps.setString(3, eve2);
+		        	ps.setString(2, col1);
+		        	ps.setString(3, col2);
+		        	ps.setString(4, col3);
+		        	ps.setString(5, col4);
+		        	ps.setString(6, col5);
+		        	ps.setString(7, col6);
 		        	ps.executeUpdate();
 		        	
 		        	}catch(Exception e1) {
