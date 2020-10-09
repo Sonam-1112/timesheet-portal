@@ -24,7 +24,6 @@ public class ViewTask {
     Object[] row;
     DefaultTableModel model;
     ViewTask(){
-    	System.out.println("Hello");
         frame = new JFrame("View Tasks");
         panel = new JPanel();
         frame.setJMenuBar(CommonMenu.displayMenu(frame));
@@ -156,9 +155,7 @@ public class ViewTask {
     	}catch(Exception e1) {
     		System.out.println(e1);
     	}
-		System.out.println(tasksList+","+LogIn_Form.userText.getText());
-		return tasksList;
-    	
+		return tasksList;	
     }
     
     public void showTask() {

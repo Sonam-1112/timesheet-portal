@@ -66,30 +66,13 @@ public class EditTask {
         	
         });
         panel.add(show);
-
-        save = new JButton("Save Changes");
-        save.setForeground(Color.WHITE);
-        save.setBorderPainted(false);
-        save.setBackground(Color.BLUE);
-        save.setFont(font);
-        save.setBounds(550,30,250,30);
-        save.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-        	
-        });
-        panel.add(save); 
        
         delete = new JButton("Delete Task");
         delete.setForeground(Color.WHITE);
         delete.setBorderPainted(false);
         delete.setBackground(Color.BLUE);
         delete.setFont(font);
-        delete.setBounds(850,30,250,30);
+        delete.setBounds(550,30,250,30);
         delete.addActionListener(new ActionListener() {
 
 			@Override
@@ -185,9 +168,7 @@ public class EditTask {
     	}catch(Exception e1) {
     		System.out.println(e1);
     	}
-		System.out.println(tasksList+","+LogIn_Form.userText.getText());
-		return tasksList;
-    	
+		return tasksList;    	
     }
     
     public void showTask() {

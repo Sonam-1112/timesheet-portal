@@ -91,7 +91,7 @@ public class LogIn_Form  {
 					ResultSet rs = ps.executeQuery();
 					if(rs.next()) {
 						//JOptionPane.showMessageDialog(null, "Login Successful...","Status",JOptionPane.DEFAULT_OPTION);
-						Personal p = new Personal();
+						Dashboard p = new Dashboard();
 						frame.dispose();
 					}
 					else {

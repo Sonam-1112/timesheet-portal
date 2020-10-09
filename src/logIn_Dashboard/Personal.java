@@ -21,7 +21,8 @@ public class Personal {
     JLabel title,name,email,ID,address,country,phone,dob,marital,bank,place_of_birth,nationality,personal_ID,SSN;
     JComboBox title_combo,marital_combo;
     JTextArea  address_text;
-    JTextField name_text, email_text, country_text, phone_text,ID_text,bank_text;
+    static JTextField name_text;
+    JTextField email_text, country_text, phone_text,ID_text,bank_text;
     JTextField dob_text,palce_birth_text,nationality_text,personal_ID_text,SSN_text;
     JButton saveNew , saveChanges;
     Personal (){
@@ -341,13 +342,11 @@ public class Personal {
         mainpanel.add(p_3);
 
         frame.add(mainpanel);
-       // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         showDetailsByDeafault();
     }
     
     public void showDetailsByDeafault() {
-    	System.out.println("Hello");
     	try{
     		Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");	

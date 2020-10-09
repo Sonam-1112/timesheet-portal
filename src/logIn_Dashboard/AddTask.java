@@ -16,8 +16,6 @@ public class AddTask{
     JFrame frame = new JFrame();
     Font font = new Font("",Font.BOLD,20);
     JPanel panel= new JPanel();
-//    JPanel panel_1,panel_2,panel_3,panel_4,panel_5;
-//    JScrollPane sc;
     JTextField taskname;
     JTextArea taskdescription;
     JTextField select_date;
@@ -34,7 +32,6 @@ public class AddTask{
         frame.setTitle("Add Task");
         frame.setLayout(null);
         panel.setLayout(null);
-       // sc = new JScrollPane(panel);
 //        try {
 //            BufferedImage i = ImageIO.read(new File("C:\\Users\\DELL\\Desktop\\Projects\\Login__DashBoard\\src\\logIn_Dashboard\\Images\\user.png"));
 //            JLabel picLabel = new JLabel(new ImageIcon(i));
@@ -43,43 +40,17 @@ public class AddTask{
 //            e.printStackTrace();
 //        }
 
-        try {
-            BufferedImage i = ImageIO.read(new File("C:\\Users\\DELL\\Desktop\\Projects\\Login__DashBoard\\src\\logIn_Dashboard\\Images\\dash.jpg"));
-            frame.setIconImage(i);
-        } catch(IOException e){
-            e.printStackTrace();
-        }
+//        try {
+//            BufferedImage i = ImageIO.read(new File("src\\logIn_Dashboard\\Images\\dash.jpg"));
+//            frame.setIconImage(i);
+//        } catch(IOException e){
+//            e.printStackTrace();
+//        }
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setBounds(0,0,screenSize.width, screenSize.height);
         panel.setSize(screenSize.width,screenSize.height);
         panel.setBounds(0,0,screenSize.width, screenSize.height);
-
-//        panel_1 = new JPanel();
-//        panel_1.setBackground(Color.PINK);
-//        panel_1.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
-//        panel_1.setLayout(null);
-//
-//        panel_2 = new JPanel();
-//        panel_2.setBackground(Color.PINK);
-//        panel_2.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
-//        panel_2.setLayout(null);
-//
-//        panel_3 = new JPanel();
-//        panel_3.setBackground(Color.PINK);
-//        panel_3.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
-//        panel_3.setLayout(null);
-//
-//        panel_4 = new JPanel();
-//        panel_4.setBackground(Color.PINK);
-//        panel_4.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
-//        panel_4.setLayout(null);
-//
-//        panel_5 = new JPanel();
-//        panel_5.setBackground(Color.PINK);
-//        panel_5.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
-//        panel_5.setLayout(null);
-
 
         select_date=  new JTextField();
         select_date.setEditable(false);
@@ -140,12 +111,11 @@ public class AddTask{
         panel.add(taskdescription);
 
         String s1[] = { "Project Manager     ","Sonakshi Patil","Dinesh Gupta","Sanjeevani More","Anita Chawla",
-        				"Swarali Patil","Yashraj Mishra","Vinod Deshmukh","Ashok Mehta" };
+        				"Swarali Patil","Yashraj Mishra","Vinod Deshmukh","Ashok Mehta","Mohit Kanojiya" };
 
         projectManager= new JComboBox(s1);
         projectManager.setBackground(Color.white);
         projectManager.setBounds(560,30,250,40);
-        //projectManager.addItemListener((ItemListener) this);
         panel.add(projectManager);
 
         String s2[] = { "Projects   		", "Android task monitoring.","Sentiment analysis for product rating.",
@@ -157,9 +127,7 @@ public class AddTask{
         projects.setBackground(Color.white);
         projects.setBounds(815,30,300,40);
         panel.add(projects);
-
-       // String t[] = { "Hours","3", "4", "5", "6", "7","8","9","10"};
-
+        
         time = new JTextField(5);
         time.setBackground(Color.white);
         time.setBounds(1120,30,75,40);
