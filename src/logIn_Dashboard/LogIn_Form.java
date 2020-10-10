@@ -83,16 +83,23 @@ public class LogIn_Form  {
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");
-					//System.out.println("Connection Done");
+					String role;
 					String query = "select * from LogIn_Data where username=? and u_password=?;";
 					PreparedStatement ps = con.prepareStatement(query);
 					ps.setString(1, userText.getText());
 					ps.setString(2, passwordText.getText());
 					ResultSet rs = ps.executeQuery();
 					if(rs.next()) {
-						//JOptionPane.showMessageDialog(null, "Login Successful...","Status",JOptionPane.DEFAULT_OPTION);
-						Dashboard p = new Dashboard();
-						frame.dispose();
+							role=rs.getString("Role_");
+							System.out.println(role);
+							if(role.equals("Manager")) {
+								Manager_Dashboard m = new Manager_Dashboard();
+								frame.dispose();
+							}
+							else {
+								Dashboard p = new Dashboard();
+								frame.dispose();
+							}
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "Wrong Username or Password!!!","Status",JOptionPane.ERROR_MESSAGE);

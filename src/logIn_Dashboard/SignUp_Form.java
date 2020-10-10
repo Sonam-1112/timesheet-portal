@@ -120,11 +120,22 @@ public class SignUp_Form{
 								pss.setString(2, password.getText());
 								pss.setString(3, againpassword.getText());
 								pss.setString(4, role_combo.getSelectedItem().toString());
-								int result = pss.executeUpdate();
-								if(result>0) {
-									System.out.println("Added");
-								}	
-							}	
+								pss.executeUpdate();
+							}
+							try {	
+								String query3 = "insert into project_data values();";
+								PreparedStatement ps2 = con.prepareStatement(query3);
+								ps2.setString(1, LogIn_Form.userText.getText());
+								ResultSet rs2 = ps2.executeQuery();
+								if(rs2.next()) {
+									
+								}
+								else {
+									JOptionPane.showMessageDialog(null, "Fill all the details...");
+								}
+					    	}catch(Exception e1) {
+					    		System.out.println(e1);
+					    	}
 						}
 					}
 				}catch(Exception e1) {

@@ -3,10 +3,16 @@ package logIn_Dashboard;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
@@ -28,7 +34,31 @@ public class CommonMenu {
             @Override
             public void menuSelected(MenuEvent e) {
                 f.setVisible(false);
-                Dashboard d = new Dashboard();
+                try {
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");
+					String role;
+					String query = "select * from LogIn_Data where username=?;";
+					PreparedStatement ps = con.prepareStatement(query);
+					ps.setString(1, LogIn_Form.userText.getText());
+					ResultSet rs = ps.executeQuery();
+					if(rs.next()) {
+							role=rs.getString("Role_");
+							System.out.println(role);
+							if(role.equals("Manager")) {
+								Manager_Dashboard m = new Manager_Dashboard();
+							}
+							else {
+								Dashboard p = new Dashboard();
+							}
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Wrong Username or Password!!!","Status",JOptionPane.ERROR_MESSAGE);
+					}
+				}catch(Exception e1) {
+					System.out.println(e1);
+				}
+				
             }
 
             @Override
