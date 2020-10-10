@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -129,6 +130,32 @@ public class Personal {
         phone_text = new JTextField();
         phone_text.setBounds(205,310,200,20);
         phone_text.setFont(font3);
+        phone_text.addKeyListener(new KeyListener(){
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9') {
+					phone_text.setEditable(true);
+		            } else {
+		            	phone_text.setEditable(false);
+		               JOptionPane.showMessageDialog(null, "Enter only numeric digits(0-9)");
+		              phone_text.setEditable(true);
+		            }
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+        	
+        });
         p_1.add(phone_text);
 
         ID = new JLabel("ID card:");
@@ -139,6 +166,32 @@ public class Personal {
         ID_text = new JTextField();
         ID_text.setBounds(205,350,200,20);
         ID_text.setFont(font3);
+        ID_text.addKeyListener(new KeyListener(){
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9') {
+					ID_text.setEditable(true);
+		            } else {
+		            	ID_text.setEditable(false);
+		               JOptionPane.showMessageDialog(null, "Enter only numeric digits(0-9)");
+		              ID_text.setEditable(true);
+		            }
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+        	
+        });
         p_1.add(ID_text);
 
         bank = new JLabel("Bank acc no.:");
@@ -149,6 +202,32 @@ public class Personal {
         bank_text = new JTextField();
         bank_text.setBounds(205,390,200,20);
         bank_text.setFont(font3);
+//        bank_text.addKeyListener(new KeyListener(){
+//
+//			@Override
+//			public void keyTyped(KeyEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void keyPressed(KeyEvent e) {
+//				if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9') {
+//					bank_text.setEditable(true);
+//		            } else {
+//		            	bank_text.setEditable(false);
+//		               JOptionPane.showMessageDialog(null, "Enter only numeric digits(0-9)");
+//		              bank_text.setEditable(true);
+//		            }
+//			}
+//
+//			@Override
+//			public void keyReleased(KeyEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//        	
+//        });
         p_1.add(bank_text);
 
         dob = new JLabel("DOB:");
@@ -193,7 +272,7 @@ public class Personal {
         marital_combo.setFont(font3);
         p_2.add(marital_combo);
 
-        personal_ID = new JLabel("Personal ID no.:");
+        personal_ID = new JLabel("Aadhar Card No..:");
         personal_ID.setFont(font2);
         personal_ID.setBounds(30,60,200,20);
         p_3.add(personal_ID);
@@ -201,6 +280,32 @@ public class Personal {
         personal_ID_text = new JTextField();
         personal_ID_text.setBounds(235,60,200,20);
         personal_ID_text.setFont(font3);
+        personal_ID_text.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9') {
+					personal_ID_text.setEditable(true);
+		            } else {
+		            	personal_ID_text.setEditable(false);
+		               JOptionPane.showMessageDialog(null, "Enter only numeric digits(0-9)");
+		               personal_ID_text.setEditable(true);
+		            }
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+        	
+        });
         p_3.add(personal_ID_text);
 
         SSN = new JLabel("Social Security no.:");
@@ -211,6 +316,32 @@ public class Personal {
         SSN_text = new JTextField();
         SSN_text.setBounds(235,100,200,20);
         SSN_text.setFont(font3);
+        SSN_text.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9') {
+					SSN_text.setEditable(true);
+		            } else {
+		            	SSN_text.setEditable(false);
+		               JOptionPane.showMessageDialog(null, "Enter only numeric digits(0-9)");
+		              SSN_text.setEditable(true);
+		            }
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+        	
+        });
         p_3.add(SSN_text);
         
         saveNew = new JButton("Save New");
@@ -303,6 +434,18 @@ public class Personal {
 						{
 							JOptionPane.showMessageDialog(null, "Some field is empty!!!","Warning",JOptionPane.WARNING_MESSAGE);
 						}
+					else if(phone_text.getText().length()>10 || phone_text.getText().length()<10 ) {
+						JOptionPane.showMessageDialog(null, "Mobile No. Should contain 10 Digits...");
+					}
+					else if(ID_text.getText().length()>9 || ID_text.getText().length()<9) {
+						JOptionPane.showMessageDialog(null, "Office ID No. Should contain 9 Digits...");
+					}
+					else if(personal_ID_text.getText().length()>12 || personal_ID_text.getText().length()<12) {
+						JOptionPane.showMessageDialog(null, "Aadhar No. Should contain 12 Digits...");
+					}
+					else if(SSN_text.getText().length()>9 || SSN_text.getText().length()<9 ) {
+						JOptionPane.showMessageDialog(null, "SSN Should contain 9 Digits...");
+					}
 					else {
 						String value1 = LogIn_Form.userText.getText() ;
 						//String value2 = LogIn_Form.passwordText.getText();

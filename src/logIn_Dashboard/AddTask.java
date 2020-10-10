@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 
 
 public class AddTask{
@@ -20,14 +22,22 @@ public class AddTask{
     JTextArea taskdescription;
     JTextField select_date;
     JButton select;
-    JComboBox projectManager;
-    JComboBox projects;
+//    static Vector v1 = new Vector();
+//    final static DefaultComboBoxModel model1 = new DefaultComboBoxModel(v1);
+	static JComboBox projectManager;
+	
+//	static Vector v2 = new Vector();
+//    final static DefaultComboBoxModel model2 = new DefaultComboBoxModel(v2);
+    static JComboBox projects;
     JTextField time;
     
     JTextField minutes;
     JButton add;
     JButton submit;
     AddTask(){
+//    	v1.add("Project Manager");
+//    	v1.add("Mohit Shetty");
+//    	v2.add("Project Name");
         frame.setJMenuBar(CommonMenu.displayMenu(frame));
         frame.setTitle("Add Task");
         frame.setLayout(null);
@@ -110,22 +120,42 @@ public class AddTask{
         taskdescription.setLineWrap(true);
         panel.add(taskdescription);
 
-        String s1[] = { "Project Manager     ","Sonakshi Patil","Dinesh Gupta","Sanjeevani More","Anita Chawla",
-        				"Swarali Patil","Yashraj Mishra","Vinod Deshmukh","Ashok Mehta","Mohit Kanojiya" };
-
-        projectManager= new JComboBox(s1);
+        projectManager = new JComboBox();
         projectManager.setBackground(Color.white);
         projectManager.setBounds(560,30,250,40);
+        try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");	
+			String query = "select distinct project_manager from project_data;";
+			PreparedStatement ps = con.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+		        projectManager.addItem(rs.getString(1));
+			}
+        }catch(Exception e1) {
+        	System.out.println(e1);
+        }
         panel.add(projectManager);
 
-        String s2[] = { "Projects   		", "Android task monitoring.","Sentiment analysis for product rating.",
-	        		"Fingerprint-based ATM system.","Advanced employee management system.",
-	        		"Image encryption using AES algorithm.","Fingerprint voting system.",
-	        		"Weather forecasting system.","Android local train ticketing system." };
-
-        projects = new JComboBox(s2);
+//        String s2[] = { "Projects   		", "Android task monitoring.","Sentiment analysis for product rating.",
+//	        		"Fingerprint-based ATM system.","Advanced employee management system.",
+//	        		"Image encryption using AES algorithm.","Fingerprint voting system.",
+//	        		"Weather forecasting system.","Android local train ticketing system." };
+        projects = new JComboBox();
         projects.setBackground(Color.white);
         projects.setBounds(815,30,300,40);
+        try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");	
+			String query = "select distinct project_name from project_data;";
+			PreparedStatement ps = con.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+		        projects.addItem(rs.getString(1));
+			}
+        }catch(Exception e1) {
+        	System.out.println(e1);
+        }
         panel.add(projects);
         
         time = new JTextField(5);

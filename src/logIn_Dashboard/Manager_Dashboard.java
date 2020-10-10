@@ -22,10 +22,12 @@ import java.util.Date;
 public class Manager_Dashboard {
 	JFrame frame;
 	JPanel panel;
-	JLabel welcome,label;
-	JTable table;
-	Object[] row;
-    DefaultTableModel model;
+	JLabel welcome,label,project_under_u;
+	JTextField Project,Project_ID;
+	JButton addproject;
+	JTable table,table2;
+	Object[] row,row2;
+    DefaultTableModel model,model2;
     String prev1,prev2;
     String name;
 	Manager_Dashboard(){
@@ -110,11 +112,103 @@ public class Manager_Dashboard {
         panel.add(pane);
         panel.add(table);
 
+        Project = new JTextField("Project Name");
+        Project .setBounds(1050,150,300,30);
+        Project.addFocusListener(new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(Project.getText().equals("Project Name")) {
+					Project.setText("");
+				}
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(Project.getText().equals("")) {
+					Project.setText("Project Name");
+				}
+					
+			}
+        	
+        });
+        panel.add(Project);
+
+        Project_ID = new JTextField("Project ID");
+        Project_ID.setBounds(1050,220,200,30);
+        Project_ID.addFocusListener(new FocusListener() {
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(Project_ID.getText().equals("Project ID")) {
+					Project_ID.setText("");
+				}
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(Project_ID.getText().equals("")) {
+					Project_ID.setText("Project ID");
+				}
+			}
+        	
+        });
+        panel.add(Project_ID);
+
+        addproject= new JButton("Add Project");
+        addproject.setBounds(1100,300,200,30);
+        addproject.setBackground(Color.blue);
+        addproject.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");	
+					if(Project.getText().equals("Project Name") || Project.getText().equals("")) {
+						JOptionPane.showMessageDialog(null, "Enter Project Name...");
+					}
+					else if(Project_ID.getText().equals("Project ID") || Project_ID.getText().equals("")) {
+						JOptionPane.showMessageDialog(null, "Enter Project ID...");
+					}
+					else {	
+						String query4 = "Select * from project_data where project_id=?;";
+						PreparedStatement ps = con.prepareStatement(query4);
+						ps.setString(1, Project_ID.getText());
+						ResultSet rs = ps.executeQuery();
+						if(rs.next()) {
+							JOptionPane.showMessageDialog(null, "ID Already Exists...."+"\n"+"Enter Correct One...","Warning",JOptionPane.WARNING_MESSAGE);
+						}
+						String query1 = "insert into project_data values(?,?,?,?);";
+						PreparedStatement ps1 = con.prepareStatement(query1);
+						ps1.setString(1, LogIn_Form.userText.getText());
+						String query2 = "select * from personal_deatils where user_name=?;";
+						PreparedStatement ps2 = con.prepareStatement(query2);
+						ps2.setString(1, LogIn_Form.userText.getText());
+						ResultSet rs2 = ps2.executeQuery();
+						if(rs2.next()) {
+								name=rs2.getString("employee_name");
+							}
+						ps1.setString(2, name);
+						ps1.setString(3, Project.getText());
+						ps1.setString(4, Project_ID.getText());
+						int rs1 = ps1.executeUpdate();
+					if(rs1>0) {
+						JOptionPane.showMessageDialog(null, "Project Added Successfully...");
+					}
+					}
+			        }catch(Exception e1) {
+			        		System.out.println(e1);
+			       	}
+			}
+        	
+        });
+        panel.add(addproject);
+        
         frame.add(panel);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         showTask();
-    }
+}
 
     public ArrayList<viewUserData> taskList(){
     	ArrayList<viewUserData> tasksList = new ArrayList<>();
