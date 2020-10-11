@@ -1,6 +1,7 @@
 package logIn_Dashboard;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 public class ViewTask {
     JFrame frame;
     Font font = new Font("",Font.BOLD,20);
-    JPanel panel;
+    JPanel panel,tablepanel;
     JButton startDate;
     JTextField datestart;
     JButton endDate;
@@ -91,6 +92,13 @@ public class ViewTask {
 
         table = new JTable();
         row = new Object[6];
+        tablepanel = new JPanel();
+        tablepanel.setLayout(new BorderLayout());
+        tablepanel.setBounds(20,100,1450,650);
+        panel.add(tablepanel);
+        DefaultTableCellRenderer tableRenderer = new DefaultTableCellRenderer();
+        tableRenderer.setHorizontalAlignment(JLabel.CENTER);
+        table.setDefaultRenderer(Object.class, tableRenderer);
         //Object[] columns = {"Date","Task Name","Task Description","Project Manager","Project Name","Time"};
         table.setBounds(20,100,1450,650);
         model = new DefaultTableModel();
@@ -108,20 +116,13 @@ public class ViewTask {
         table.setGridColor(Color.red);
         table.setSelectionForeground(Color.white);
         table.setFont(new Font("", Font.PLAIN,15));
-        table.setAutoCreateRowSorter(true);
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        table.setFillsViewportHeight(true);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setRowHeight(table.getRowHeight()+20);
-        table.setAutoCreateColumnsFromModel(true);
-        table.setPreferredScrollableViewportSize(new Dimension(450,630));
-        table.setFillsViewportHeight(true);
-
-        
         
         JScrollPane pane = new JScrollPane(table);
-        pane.setForeground(Color.RED);
-        pane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        pane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+//        pane.setForeground(Color.RED);
+//        pane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+//        pane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         pane.setVisible(true);
         panel.add(pane);
         panel.add(table);

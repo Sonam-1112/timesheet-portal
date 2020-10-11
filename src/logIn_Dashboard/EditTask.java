@@ -1,6 +1,7 @@
 package logIn_Dashboard;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
@@ -111,6 +112,9 @@ public class EditTask {
         
         table = new JTable();
         row = new Object[6];
+        DefaultTableCellRenderer tableRenderer = new DefaultTableCellRenderer();
+        tableRenderer.setHorizontalAlignment(JLabel.CENTER);
+        table.setDefaultRenderer(Object.class, tableRenderer);
         //Object[] columns = {"Date","Task Name","Task Description","Project Manager","Project Name","Time"};
         table.setBounds(20,100,1450,650);
         model = new DefaultTableModel();
