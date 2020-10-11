@@ -6,8 +6,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -77,6 +75,8 @@ public class EditTask {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete a task?","Confirmation",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+				if(result == JOptionPane.YES_OPTION){
 				int row = table.getSelectedRow();
 		        String col1 = table.getModel().getValueAt(row, 0).toString();
 		        String col2 = table.getModel().getValueAt(row, 1).toString();
@@ -85,7 +85,6 @@ public class EditTask {
 		        String col5 = table.getModel().getValueAt(row, 4).toString();
 		        String col6 = table.getModel().getValueAt(row, 5).toString();
 		        model.removeRow(row);
-		      //  String delRow = "delete from add_task where user_name =? and selected_date=?;";
 		        try {
 		    		Class.forName("com.mysql.cj.jdbc.Driver");
 		    		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");
@@ -103,6 +102,7 @@ public class EditTask {
 		        	}catch(Exception e1) {
 		        		System.out.println(e1);
 		        	}
+				}
 			}
         	
         });
@@ -137,7 +137,6 @@ public class EditTask {
 
         JScrollPane pane = new JScrollPane(table);
         pane.setForeground(Color.RED);
-        pane.setBackground(Color.white);
         pane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         pane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         pane.setVisible(true);

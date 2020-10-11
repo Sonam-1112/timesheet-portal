@@ -21,7 +21,7 @@ public class Dashboard {
     Dashboard(){
     	Date date = new Date();  
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");  
-        String strDate= formatter.format(date);  
+        formatter.format(date);  
         
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, -1);

@@ -32,7 +32,6 @@ public class LogIn_Form  {
         panel.setLayout(null);
         frame.setTitle("Login Site");
 
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize(400,400);
         panel.setSize(new Dimension(300,300));
         panel.setBounds(50,25,300,300);
@@ -67,10 +66,6 @@ public class LogIn_Form  {
         passwordText = new JPasswordField(20);
         passwordText.setBounds(130,80,150,25);
         panel.add(passwordText);
-
-//        success = new JLabel("");
-//        success.setBounds(50,120,200,30);
-//        panel.add(success);
         
         buttonLogin = new JButton("Login");
         buttonLogin.setBounds(120,150,80,30);
@@ -92,11 +87,11 @@ public class LogIn_Form  {
 					if(rs.next()) {
 							role=rs.getString("Role_");
 							if(role.equals("Manager")) {
-								Manager_Dashboard m = new Manager_Dashboard();
+								new Manager_Dashboard();
 								frame.dispose();
 							}
 							else {
-								Dashboard p = new Dashboard();
+								new Dashboard();
 								frame.dispose();
 							}
 					}
@@ -129,7 +124,7 @@ public class LogIn_Form  {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                SignUp_Form s =new SignUp_Form();
+                new SignUp_Form();
                 frame.dispose();
             }
 

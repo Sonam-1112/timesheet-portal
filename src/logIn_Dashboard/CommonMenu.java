@@ -46,10 +46,10 @@ public class CommonMenu {
 							role=rs.getString("Role_");
 							System.out.println(role);
 							if(role.equals("Manager")) {
-								Manager_Dashboard m = new Manager_Dashboard();
+								new Manager_Dashboard();
 							}
 							else {
-								Dashboard p = new Dashboard();
+								new Dashboard();
 							}
 					}
 					else {
@@ -76,7 +76,7 @@ public class CommonMenu {
             @Override
             public void menuSelected(MenuEvent e) {
                 f.setVisible(false);
-                Personal p = new Personal();
+                new Personal();
             }
 
             @Override
@@ -93,8 +93,11 @@ public class CommonMenu {
         logout.addMenuListener(new MenuListener() {
             @Override
             public void menuSelected(MenuEvent e) {
-                f.setVisible(false);
-                LogIn_Form l =new LogIn_Form();
+                int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?","Confirmation",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+				if(result == JOptionPane.YES_OPTION){
+					f.setVisible(false);
+					new LogIn_Form();
+				}
             }
 
             @Override
@@ -113,7 +116,7 @@ public class CommonMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 f.setVisible(false);
-                AddTask d = new AddTask();
+                new AddTask();
             }
         });
 
@@ -122,7 +125,7 @@ public class CommonMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 f.setVisible(false);
-               EditTask et =new EditTask();
+               new EditTask();
             }
         });
 
@@ -131,7 +134,7 @@ public class CommonMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 f.setVisible(false);
-                ViewTask v =new ViewTask();
+                new ViewTask();
             }
         });
 

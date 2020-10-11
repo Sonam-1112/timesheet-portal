@@ -1,15 +1,12 @@
 package logIn_Dashboard;
 
-import javax.imageio.ImageIO;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -29,14 +26,11 @@ public class SignUp_Form{
     JComboBox role_combo;
     JButton buttonRegister;
     JLabel login;
-    //JLabel success;
     SignUp_Form(){
         frame = new JFrame();
         panel = new JPanel();
-       // frame.setJMenuBar(CommonMenu.displayMenu(frame));
         panel.setBackground(Color.LIGHT_GRAY);
         frame.setTitle("SignUp");
-        frame.setLayout(new BorderLayout());
         frame.setSize(400,400);
         panel.setSize(300,300);
         frame.setResizable(false);
@@ -166,15 +160,9 @@ public class SignUp_Form{
         });
         panel.add(login);
 
-//        success = new JLabel("");
-//        success.setBounds(120,190,500,30);
-//        success.setForeground(Color.red);
-//        success.setFont(new Font("",Font.CENTER_BASELINE,15));
-//        panel.add(success);
-
         panel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         panel.setLayout(null);
-        frame.add(panel,BorderLayout.CENTER);
+        frame.add(panel);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }

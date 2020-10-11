@@ -120,7 +120,6 @@ public class ViewTask {
         
         JScrollPane pane = new JScrollPane(table);
         pane.setForeground(Color.RED);
-        pane.setBackground(Color.white);
         pane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         pane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         pane.setVisible(true);

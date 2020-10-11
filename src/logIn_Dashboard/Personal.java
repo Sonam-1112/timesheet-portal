@@ -202,32 +202,6 @@ public class Personal {
         bank_text = new JTextField();
         bank_text.setBounds(205,390,200,20);
         bank_text.setFont(font3);
-//        bank_text.addKeyListener(new KeyListener(){
-//
-//			@Override
-//			public void keyTyped(KeyEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//
-//			@Override
-//			public void keyPressed(KeyEvent e) {
-//				if (e.getKeyChar() >= '0' && e.getKeyChar() <= '9') {
-//					bank_text.setEditable(true);
-//		            } else {
-//		            	bank_text.setEditable(false);
-//		               JOptionPane.showMessageDialog(null, "Enter only numeric digits(0-9)");
-//		              bank_text.setEditable(true);
-//		            }
-//			}
-//
-//			@Override
-//			public void keyReleased(KeyEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//        	
-//        });
         p_1.add(bank_text);
 
         dob = new JLabel("DOB:");

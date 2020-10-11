@@ -1,19 +1,14 @@
 package logIn_Dashboard;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,9 +17,10 @@ import java.util.Date;
 public class Manager_Dashboard {
 	JFrame frame;
 	JPanel panel;
-	JLabel welcome,label,project_under_u;
+	Font font = new Font("",Font.BOLD,20);
+	JLabel welcome,label,projects_under_u;
 	JTextField Project,Project_ID;
-	JButton addproject;
+	JButton addproject,deleteproject;
 	JTable table,table2;
 	Object[] row,row2;
     DefaultTableModel model,model2;
@@ -43,7 +39,7 @@ public class Manager_Dashboard {
 		
         Date date = new Date();  
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");  
-        String strDate= formatter.format(date);  
+        formatter.format(date);  
         
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, -1);
@@ -80,7 +76,7 @@ public class Manager_Dashboard {
         table = new JTable();
         row = new Object[6];
         //Object[] columns = {"Date","Task Name","Task Description","Project Manager","Project Name","Time"};
-        table.setBounds(20,100,1000,650);
+        table.setBounds(20,100,1000,660);
         model = new DefaultTableModel();
         table.setModel(model);
         model.addColumn("Date");
@@ -113,7 +109,7 @@ public class Manager_Dashboard {
         panel.add(table);
 
         Project = new JTextField("Project Name");
-        Project .setBounds(1050,150,300,30);
+        Project .setBounds(1050,100,300,30);
         Project.addFocusListener(new FocusListener() {
 
 			@Override
@@ -135,7 +131,7 @@ public class Manager_Dashboard {
         panel.add(Project);
 
         Project_ID = new JTextField("Project ID");
-        Project_ID.setBounds(1050,220,200,30);
+        Project_ID.setBounds(1050,150,200,30);
         Project_ID.addFocusListener(new FocusListener() {
 
 			@Override
@@ -156,7 +152,9 @@ public class Manager_Dashboard {
         panel.add(Project_ID);
 
         addproject= new JButton("Add Project");
-        addproject.setBounds(1100,300,200,30);
+        addproject.setBounds(1100,200,200,30);
+        addproject.setForeground(Color.white);
+        addproject.setFont(font);
         addproject.setBackground(Color.blue);
         addproject.addActionListener(new ActionListener() {
 			@Override
@@ -204,10 +202,82 @@ public class Manager_Dashboard {
         });
         panel.add(addproject);
         
+        projects_under_u = new JLabel("Projects Under You...");
+        projects_under_u.setBounds(1050, 260, 400, 30);
+        projects_under_u.setForeground(Color.black);
+        projects_under_u.setFont(font);
+        panel.add(projects_under_u);
+        
+        table2 = new JTable();
+        row2 = new Object[2];
+        //Object[] columns = {"Date","Task Name","Task Description","Project Manager","Project Name","Time"};
+        table2.setBounds(1050,300,410,400);
+        model2 = new DefaultTableModel();
+        table2.setModel(model2);
+        model2.addColumn("Projec ID");
+        model2.addColumn("Project Name");
+        
+        table2.setBackground(Color.white);
+        table2.setForeground(Color.BLACK);
+        table2.setSelectionBackground(Color.YELLOW);
+        table2.setGridColor(Color.red);
+        table2.setSelectionForeground(Color.white);
+        table2.setFont(new Font("", Font.PLAIN,15));
+        table2.setAutoCreateRowSorter(true);
+        table2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        table2.setRowHeight(table.getRowHeight()+10);
+        table2.setAutoCreateColumnsFromModel(true);
+        table2.setPreferredScrollableViewportSize(new Dimension(450,630));
+        table2.setFillsViewportHeight(true);
+        
+        JScrollPane pane2 = new JScrollPane(table2);
+        pane2.setForeground(Color.RED);
+        pane2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        pane2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        pane2.setVisible(true);
+        panel.add(pane2);
+        panel.add(table2);
+
+        deleteproject = new JButton("Delete Project");
+        deleteproject.setForeground(Color.WHITE);
+        deleteproject.setBorderPainted(false);
+        deleteproject.setBackground(Color.BLUE);
+        deleteproject.setFont(font);
+        deleteproject.setBounds(1100,730,200,30);
+        deleteproject.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete a project?","Confirmation",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+				if(result == JOptionPane.YES_OPTION){
+					int row = table2.getSelectedRow();
+			        String col1 = table2.getModel().getValueAt(row, 0).toString();
+			        String col2 = table2.getModel().getValueAt(row, 1).toString();
+			        model2.removeRow(row);
+			        try {
+			    		Class.forName("com.mysql.cj.jdbc.Driver");
+			    		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");
+			        	String query ="delete from project_data where p_username=? and project_name=? and project_id=?;";
+			        	PreparedStatement ps = con.prepareStatement(query); 
+			        	ps.setString(1, LogIn_Form.userText.getText());
+			        	ps.setString(2, col1);
+			        	ps.setString(3, col2);
+			        	ps.executeUpdate();
+			        	}catch(Exception e1) {
+			        		System.out.println(e1);
+			        	}
+		            }
+			}
+        	
+        });
+        panel.add(deleteproject); 
+        
+        
         frame.add(panel);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         showTask();
+        showProject();
 }
 
     public ArrayList<viewUserData> taskList(){
@@ -245,4 +315,31 @@ public class Manager_Dashboard {
     		model.addRow(row);
     	}
     }
+    public ArrayList<Manager_data> projectList(){
+    	ArrayList<Manager_data> projectssList = new ArrayList<>();
+    	try {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");
+		Manager_data manager;
+    	String query = "select * from project_data where p_username=?;";
+    	PreparedStatement ps = con.prepareStatement(query);
+    	ps.setString(1, LogIn_Form.userText.getText());
+    	ResultSet rs = ps.executeQuery();
+    	while(rs.next()) {
+    		 manager = new Manager_data(rs.getString("project_id"),rs.getString("project_name"));
+    		 projectssList.add(manager);
+    	}
+    	}catch(Exception e1) {
+    		System.out.println(e1);
+    	}
+		return projectssList;
+    }
+    public void showProject() {
+    	ArrayList<Manager_data> list = projectList();
+    	for(int i=0;i<list.size();i++) {
+    		row2[0]=list.get(i).getproject_id();
+    		row2[1]=list.get(i).getproject_name();
+    		model2.addRow(row2);
+    }
+}
 }

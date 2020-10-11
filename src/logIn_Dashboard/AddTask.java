@@ -22,22 +22,14 @@ public class AddTask{
     JTextArea taskdescription;
     JTextField select_date;
     JButton select;
-//    static Vector v1 = new Vector();
-//    final static DefaultComboBoxModel model1 = new DefaultComboBoxModel(v1);
-	static JComboBox projectManager;
-	
-//	static Vector v2 = new Vector();
-//    final static DefaultComboBoxModel model2 = new DefaultComboBoxModel(v2);
-    static JComboBox projects;
+	JComboBox projectManager;
+    JComboBox projects;
     JTextField time;
     
     JTextField minutes;
     JButton add;
     JButton submit;
     AddTask(){
-//    	v1.add("Project Manager");
-//    	v1.add("Mohit Shetty");
-//    	v2.add("Project Name");
         frame.setJMenuBar(CommonMenu.displayMenu(frame));
         frame.setTitle("Add Task");
         frame.setLayout(null);
@@ -101,7 +93,7 @@ public class AddTask{
 
         taskdescription = new JTextArea(20,100);
         taskdescription.setText("Task Description");
-        taskdescription.setBounds(355,30,200,100);
+        taskdescription.setBounds(355,100,200,100);
         taskdescription.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
 
         taskdescription.addFocusListener(new FocusListener() {
@@ -122,7 +114,7 @@ public class AddTask{
 
         projectManager = new JComboBox();
         projectManager.setBackground(Color.white);
-        projectManager.setBounds(560,30,250,40);
+        projectManager.setBounds(560,100,250,40);
         try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");	
@@ -143,7 +135,7 @@ public class AddTask{
 //	        		"Weather forecasting system.","Android local train ticketing system." };
         projects = new JComboBox();
         projects.setBackground(Color.white);
-        projects.setBounds(815,30,300,40);
+        projects.setBounds(815,100,300,40);
         try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");	
@@ -160,7 +152,7 @@ public class AddTask{
         
         time = new JTextField(5);
         time.setBackground(Color.white);
-        time.setBounds(1120,30,75,40);
+        time.setBounds(1120,100,75,40);
         time.setFont(new Font("Times New Roman",Font.PLAIN,20));
         time.setText("Hours");
         time.addFocusListener(new FocusListener() {
@@ -213,7 +205,7 @@ public class AddTask{
 
         minutes = new JTextField(5);
         minutes.setBackground(Color.white);
-        minutes.setBounds(1200,30,75,40);
+        minutes.setBounds(1200,100,75,40);
         minutes.setFont(new Font("Times New Roman",Font.PLAIN,20));
         minutes.setText("Minutes");
         minutes.addFocusListener(new FocusListener() {
@@ -280,7 +272,7 @@ public class AddTask{
         submit.setBorderPainted(false);
         submit.setBackground(Color.BLUE);
         submit.setFont(font);
-        submit.setBounds(1080,85,250,30);
+        submit.setBounds(1080,170,250,30);
         submit.addActionListener(new ActionListener() {
 
 			@Override
