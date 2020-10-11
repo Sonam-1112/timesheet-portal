@@ -22,6 +22,7 @@ public class AddTask{
     JTextArea taskdescription;
     JTextField select_date;
     JButton select;
+    JLabel proManager,proName;
 	JComboBox projectManager;
     JComboBox projects;
     JTextField time;
@@ -34,6 +35,7 @@ public class AddTask{
         frame.setTitle("Add Task");
         frame.setLayout(null);
         panel.setLayout(null);
+        panel.setBackground(Color.decode("#FFE4B5"));
 //        try {
 //            BufferedImage i = ImageIO.read(new File("C:\\Users\\DELL\\Desktop\\Projects\\Login__DashBoard\\src\\logIn_Dashboard\\Images\\user.png"));
 //            JLabel picLabel = new JLabel(new ImageIcon(i));
@@ -41,8 +43,6 @@ public class AddTask{
 //        } catch(IOException e){
 //            e.printStackTrace();
 //        }
-
-        ImageIcon ai = new ImageIcon("somedir");
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setBounds(0,0,screenSize.width, screenSize.height);
@@ -107,6 +107,11 @@ public class AddTask{
         taskdescription.setLineWrap(true);
         panel.add(taskdescription);
 
+        proManager = new JLabel("Project Manager");
+        proManager.setBounds(560,60,200,30);
+        proManager.setFont(font);
+        panel.add(proManager);
+        
         projectManager = new JComboBox();
         projectManager.setBackground(Color.white);
         projectManager.setBounds(560,100,250,40);
@@ -124,10 +129,12 @@ public class AddTask{
         }
         panel.add(projectManager);
 
-//        String s2[] = { "Projects   		", "Android task monitoring.","Sentiment analysis for product rating.",
-//	        		"Fingerprint-based ATM system.","Advanced employee management system.",
-//	        		"Image encryption using AES algorithm.","Fingerprint voting system.",
-//	        		"Weather forecasting system.","Android local train ticketing system." };
+        proName = new JLabel("Project Name");
+        proName.setBounds(815,60,150,30);
+        proName.setFont(font);
+        panel.add(proName);
+        
+
         projects = new JComboBox();
         projects.setBackground(Color.white);
         projects.setBounds(815,100,300,40);

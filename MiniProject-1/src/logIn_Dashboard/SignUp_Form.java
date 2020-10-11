@@ -1,6 +1,5 @@
 package logIn_Dashboard;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,14 +11,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class SignUp_Form{
-    JFrame frame;
+
+public class SignUp_Form {
+	JFrame frame;
     JPanel panel;
     JLabel newuser;
     Font font = new Font("",Font.BOLD,20);
     JLabel newpassword;
     JLabel confirmpassword;
-    JTextField nameText;
+    static JTextField nameText;
     JPasswordField password;
     JPasswordField againpassword;
     JLabel role;
@@ -29,8 +29,9 @@ public class SignUp_Form{
     SignUp_Form(){
         frame = new JFrame();
         panel = new JPanel();
-        panel.setBackground(Color.LIGHT_GRAY);
+        panel.setBackground(Color.decode("#FFE4B5"));
         frame.setTitle("SignUp");
+        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK,2));
         frame.setSize(400,400);
         panel.setSize(300,300);
         frame.setResizable(false);
@@ -109,8 +110,6 @@ public class SignUp_Form{
 							int r = p.executeUpdate();
 							if(r>0) {
 								JOptionPane.showMessageDialog(null, "Registered Successfully...");
-								Personal p1 = new Personal();
-								frame.dispose();
 								String q = "insert into login_data values(?,?,?,?);";
 								PreparedStatement pss = con.prepareStatement(q);
 								pss.setString(1, nameText.getText());
@@ -118,6 +117,24 @@ public class SignUp_Form{
 								pss.setString(3, againpassword.getText());
 								pss.setString(4, role_combo.getSelectedItem().toString());
 								pss.executeUpdate();
+								
+								String role;
+								String query = "select * from signup_data where s_username=? and s_password=?;";
+								PreparedStatement ps2 = con.prepareStatement(query);
+								ps2.setString(1, nameText.getText());
+								ps2.setString(2, password.getText());
+								ResultSet rs1 = ps2.executeQuery();
+								if(rs1.next()) {
+										role=rs1.getString("Role_");
+										if(role.equals("Manager")) {
+											new Manager_Dashboard();
+											frame.dispose();
+										}
+										else {
+											new Dashboard();
+											frame.dispose();
+										}
+								}
 							}
 						}
 					}
@@ -170,3 +187,4 @@ public class SignUp_Form{
         frame.setVisible(true);
     }
 }
+

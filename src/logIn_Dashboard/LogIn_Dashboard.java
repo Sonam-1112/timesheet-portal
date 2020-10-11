@@ -1,9 +1,7 @@
 package logIn_Dashboard;
 
-import java.sql.SQLException;
-
 public class LogIn_Dashboard  {
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+    public static void main(String[] args) {
        new LogIn_Form();
     }
 }

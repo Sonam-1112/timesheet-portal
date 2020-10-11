@@ -10,8 +10,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
-public class LogIn_Form  {
-    JFrame frame;
+
+public class LogIn_Form {
+	JFrame frame;
     JPanel panel;
     JLabel heading;
     Font font = new Font("",Font.BOLD,30);
@@ -34,10 +35,10 @@ public class LogIn_Form  {
         frame.setSize(400,400);
         panel.setSize(new Dimension(300,300));
         panel.setBounds(50,25,300,300);
-        panel.setBackground(Color.white);
+        panel.setBackground(Color.decode("#FFE4B5"));
         panel.setBorder(BorderFactory.createLineBorder(Color.BLACK,2));
 
-        Image img = new ImageIcon(this.getClass().getResource("/"));
+ 
         
         try {
             BufferedImage i = ImageIO.read(new File("C:\\Users\\DELL\\Desktop\\Projects\\Login__DashBoard\\src\\logIn_Dashboard\\Images\\Timesheet.png"));
@@ -147,3 +148,4 @@ public class LogIn_Form  {
         frame.setVisible(true);
     }
 }
+
