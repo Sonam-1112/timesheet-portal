@@ -81,7 +81,7 @@ public class SignUp_Form {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
-					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");
 					if(nameText.getText().equals("") || password.getText().equals("") || againpassword.getText().equals(""))
 					{
 						JOptionPane.showMessageDialog(null, "Some field is empty!!!","Alert",JOptionPane.WARNING_MESSAGE);
@@ -164,7 +164,7 @@ public class SignUp_Form {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                LogIn_Form l = new LogIn_Form();
+                new LogIn_Form();
                 frame.dispose();
             }
 

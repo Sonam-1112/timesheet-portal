@@ -79,7 +79,7 @@ public class LogIn_Form {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
-					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");
 					String role;
 					String query = "select * from LogIn_Data where username=? and u_password=?;";
 					PreparedStatement ps = con.prepareStatement(query);

@@ -136,7 +136,7 @@ public class ViewTask {
     	ArrayList<viewUserData> tasksList = new ArrayList<>();
     	try {
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");
 		viewUserData user;
     	String query = "select * from add_task where user_name=? and selected_date>=? and selected_date<=?;";
     	PreparedStatement ps = con.prepareStatement(query);

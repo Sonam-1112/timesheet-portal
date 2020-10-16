@@ -89,7 +89,7 @@ public class EditTask {
 		        model.removeRow(row);
 		        try {
 		    		Class.forName("com.mysql.cj.jdbc.Driver");
-		    		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");
+		    		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");
 		        	String query ="delete from add_task where user_name=? and selected_date=? and task_name=? and task_description=? and project_manager=? and project_name=? and time_spent=?;";
 		        	PreparedStatement ps = con.prepareStatement(query);
 		        	ps.setString(1, LogIn_Form.userText.getText());
@@ -152,7 +152,7 @@ public class EditTask {
     	ArrayList<editUserData> tasksList = new ArrayList<>();
     	try {
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");
 		editUserData user;
     	String query = "select * from add_task where user_name=? and selected_date=?;";
     	PreparedStatement ps = con.prepareStatement(query);

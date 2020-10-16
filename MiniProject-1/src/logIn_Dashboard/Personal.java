@@ -330,7 +330,7 @@ public class Personal {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
-					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");	
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");	
 				if(name_text.getText().equals("")  || email_text.getText().equals("") || 
 					address_text.getText().equals("") || country_text.getText().equals("") ||
 					phone_text.getText().equals("") || ID_text.getText().equals("") ||
@@ -413,7 +413,7 @@ public class Personal {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
-					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");	
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");	
 					if(name_text.getText().equals("")  || email_text.getText().equals("") || 
 							address_text.getText().equals("") || country_text.getText().equals("") ||
 							phone_text.getText().equals("") || ID_text.getText().equals("") ||
@@ -480,7 +480,7 @@ public class Personal {
     public void showDetailsByDeafault() {
     	try{
     		Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","Sonam@123");	
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");	
 			String query = "select * from personal_deatils where user_name=?;";
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setString(1, LogIn_Form.userText.getText());
