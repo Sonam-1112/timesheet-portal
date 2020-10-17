@@ -21,7 +21,7 @@ public class Manager_Dashboard {
 	Font font = new Font("",Font.BOLD,20);
 	JLabel welcome,label,projects_under_u;
 	JTextField Project,Project_ID;
-	JButton addproject,deleteproject;
+	JButton addproject,deleteproject,showdetails;
 	JTable table,table2;
 	Object[] row,row2;
     DefaultTableModel model,model2;
@@ -234,13 +234,13 @@ public class Manager_Dashboard {
         pane2.setVisible(true);
         tablepanel2.add(pane2);
         panel.add(tablepanel2);
-
+        
         deleteproject = new JButton("Delete Project");
         deleteproject.setForeground(Color.WHITE);
         deleteproject.setBorderPainted(false);
         deleteproject.setBackground(Color.BLUE);
         deleteproject.setFont(font);
-        deleteproject.setBounds(1100,730,200,30);
+        deleteproject.setBounds(1050,730,200,30);
         deleteproject.addActionListener(new ActionListener() {
 
 			@Override
@@ -268,6 +268,39 @@ public class Manager_Dashboard {
         	
         });
         panel.add(deleteproject); 
+        
+        showdetails = new JButton("Show Details");
+        showdetails.setForeground(Color.WHITE);
+        showdetails.setBorderPainted(false);
+        showdetails.setBackground(Color.BLUE);
+        showdetails.setFont(font);
+        showdetails.setBounds(1300, 730, 200, 30);
+        showdetails.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new Project_details();
+				frame.dispose();
+//				int row = table2.getSelectedRow();
+//		        String col1 = table2.getModel().getValueAt(row, 0).toString();
+//		        String col2 = table2.getModel().getValueAt(row, 1).toString();
+//		        model2.removeRow(row);
+//				try {
+//		    		Class.forName("com.mysql.cj.jdbc.Driver");
+//		    		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");
+//		        	String query ="delete from project_data where p_username=? and project_name=? and project_id=?;";
+//		        	PreparedStatement ps = con.prepareStatement(query); 
+//		        	ps.setString(1, LogIn_Form.userText.getText());
+//		        	ps.setString(2, col1);
+//		        	ps.setString(3, col2);
+//		        	ps.executeUpdate();
+//		        	}catch(Exception e1) {
+//		        		System.out.println(e1);
+//		        	}
+			}
+        	
+        });
+        panel.add(showdetails);
         
         
         frame.add(panel);

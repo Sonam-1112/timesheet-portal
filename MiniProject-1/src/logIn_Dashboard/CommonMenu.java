@@ -44,7 +44,6 @@ public class CommonMenu {
 					ResultSet rs = ps.executeQuery();
 					if(rs.next()) {
 							role=rs.getString("Role_");
-							System.out.println(role);
 							if(role.equals("Manager")) {
 								new Manager_Dashboard();
 							}
