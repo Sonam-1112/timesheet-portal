@@ -254,7 +254,7 @@ public class Manager_Dashboard {
 			        try {
 			    		Class.forName("com.mysql.cj.jdbc.Driver");
 			    		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","");
-			        	String query ="delete from project_data where p_username=? and project_name=? and project_id=?;";
+			        	String query ="delete from project_data where user_name=? and project_name=? and project_id=?;";
 			        	PreparedStatement ps = con.prepareStatement(query); 
 			        	ps.setString(1, LogIn_Form.userText.getText());
 			        	ps.setString(2, col1);
@@ -279,24 +279,11 @@ public class Manager_Dashboard {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new Project_details();
+				int row = table2.getSelectedRow();
+		        String col1 = table2.getModel().getValueAt(row, 0).toString();
+		        String col2 = table2.getModel().getValueAt(row, 1).toString();
+				new Project_details(col1,col2);
 				frame.dispose();
-//				int row = table2.getSelectedRow();
-//		        String col1 = table2.getModel().getValueAt(row, 0).toString();
-//		        String col2 = table2.getModel().getValueAt(row, 1).toString();
-//		        model2.removeRow(row);
-//				try {
-//		    		Class.forName("com.mysql.cj.jdbc.Driver");
-//		    		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");
-//		        	String query ="delete from project_data where p_username=? and project_name=? and project_id=?;";
-//		        	PreparedStatement ps = con.prepareStatement(query); 
-//		        	ps.setString(1, LogIn_Form.userText.getText());
-//		        	ps.setString(2, col1);
-//		        	ps.setString(3, col2);
-//		        	ps.executeUpdate();
-//		        	}catch(Exception e1) {
-//		        		System.out.println(e1);
-//		        	}
 			}
         	
         });
