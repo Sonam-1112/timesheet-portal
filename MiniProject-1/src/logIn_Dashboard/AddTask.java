@@ -117,7 +117,7 @@ public class AddTask{
         projectManager.setBounds(560,100,250,40);
         try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");	
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","");	
 			String query = "select distinct project_manager from project_data;";
 			PreparedStatement ps = con.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
@@ -140,7 +140,7 @@ public class AddTask{
         projects.setBounds(815,100,300,40);
         try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");	
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","");	
 			String query = "select distinct project_name from project_data;";
 			PreparedStatement ps = con.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
@@ -281,7 +281,7 @@ public class AddTask{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
-					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");	
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","");	
 				if(select_date.getText().equals("")  || taskname.getText().equals("Task Name") || 
 					taskdescription.getText().equals("Task Description") ||
 					projectManager.getSelectedItem().equals("Project Manager") || 

@@ -36,7 +36,7 @@ public class CommonMenu {
                 f.setVisible(false);
                 try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
-					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","");
 					String role;
 					String query = "select * from LogIn_Data where username=?;";
 					PreparedStatement ps = con.prepareStatement(query);

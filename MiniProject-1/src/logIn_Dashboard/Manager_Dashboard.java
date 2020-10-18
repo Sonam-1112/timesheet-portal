@@ -54,7 +54,7 @@ public class Manager_Dashboard {
         
         try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");	
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","");	
 			String query = "select * from personal_deatils where user_name=?;";
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setString(1, LogIn_Form.userText.getText());
@@ -160,7 +160,7 @@ public class Manager_Dashboard {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
-					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");	
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","");	
 					if(Project.getText().equals("Project Name") || Project.getText().equals("")) {
 						JOptionPane.showMessageDialog(null, "Enter Project Name...");
 					}
@@ -253,7 +253,7 @@ public class Manager_Dashboard {
 			        model2.removeRow(row);
 			        try {
 			    		Class.forName("com.mysql.cj.jdbc.Driver");
-			    		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");
+			    		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","");
 			        	String query ="delete from project_data where p_username=? and project_name=? and project_id=?;";
 			        	PreparedStatement ps = con.prepareStatement(query); 
 			        	ps.setString(1, LogIn_Form.userText.getText());
@@ -314,7 +314,7 @@ public class Manager_Dashboard {
     	ArrayList<viewUserData> tasksList = new ArrayList<>();
     	try {
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","");
 		viewUserData user;
     	String query = "select * from add_task where user_name=? and selected_date>=? and selected_date<=?;";
     	PreparedStatement ps = con.prepareStatement(query);
@@ -349,9 +349,9 @@ public class Manager_Dashboard {
     	ArrayList<Manager_data> projectssList = new ArrayList<>();
     	try {
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","");
 		Manager_data manager;
-    	String query = "select * from project_data where p_username=?;";
+    	String query = "select * from project_data where user_name=?;";
     	PreparedStatement ps = con.prepareStatement(query);
     	ps.setString(1, LogIn_Form.userText.getText());
     	ResultSet rs = ps.executeQuery();

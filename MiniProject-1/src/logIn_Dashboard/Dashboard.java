@@ -46,7 +46,7 @@ public class Dashboard {
 
         try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");	
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","");	
 			String query = "select * from personal_deatils where user_name=?;";
 			PreparedStatement ps = con.prepareStatement(query);
 			ps.setString(1, LogIn_Form.userText.getText());
@@ -109,7 +109,7 @@ public class Dashboard {
     	ArrayList<viewUserData> tasksList = new ArrayList<>();
     	try {
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/testdb","root","SonamG@123");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","");
 		viewUserData user;
     	String query = "select * from add_task where user_name=? and selected_date>=? and selected_date<=?;";
     	PreparedStatement ps = con.prepareStatement(query);
