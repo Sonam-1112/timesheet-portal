@@ -36,13 +36,13 @@ public class AddTask{
         frame.setLayout(null);
         panel.setLayout(null);
         panel.setBackground(Color.decode("#FFE4B5"));
-//        try {
-//            BufferedImage i = ImageIO.read(new File("C:\\Users\\DELL\\Desktop\\Projects\\Login__DashBoard\\src\\logIn_Dashboard\\Images\\user.png"));
-//            JLabel picLabel = new JLabel(new ImageIcon(i));
-//            panel1_1.add(picLabel);
-//        } catch(IOException e){
-//            e.printStackTrace();
-//        }
+        
+        try {
+            BufferedImage i = ImageIO.read(new File("C:\\Users\\DELL\\Desktop\\Projects\\Login__DashBoard\\src\\logIn_Dashboard\\Images\\Timesheet.png"));
+            frame.setIconImage(i);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setBounds(0,0,screenSize.width, screenSize.height);

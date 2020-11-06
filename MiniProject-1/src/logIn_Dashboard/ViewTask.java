@@ -1,11 +1,15 @@
 package logIn_Dashboard;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -35,6 +39,13 @@ public class ViewTask {
         frame.setBounds(0,0,screenSize.width, screenSize.height);
         panel.setSize(screenSize.width,screenSize.height);
 
+        try {
+            BufferedImage i = ImageIO.read(new File("C:\\Users\\DELL\\Desktop\\Projects\\Login__DashBoard\\src\\logIn_Dashboard\\Images\\Timesheet.png"));
+            frame.setIconImage(i);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
         datestart=  new JTextField();
         datestart.setEditable(false);
         datestart.setBounds(50,55,150,30);
@@ -80,12 +91,7 @@ public class ViewTask {
         View.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//            	if(datestart.getText().compareTo(dateend.getText())>0) {
-//            		JOptionPane.showMessageDialog(null, "Please Choose Correct Date!!!","Suggestion",JOptionPane.PLAIN_MESSAGE);;
-//            	}
-//            	else {
             		showTask();
-//            	}
             }
         });
         panel.add(View);

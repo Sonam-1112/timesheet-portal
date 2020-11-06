@@ -3,12 +3,16 @@ package logIn_Dashboard;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class Project_details {
@@ -34,7 +38,14 @@ public class Project_details {
 		panel.setLayout(null);
         panel.setBackground(Color.decode("#FFE4B5"));
         panel.setSize(screenSize.width,screenSize.height);
-		    
+		 
+        try {
+            BufferedImage i = ImageIO.read(new File("C:\\Users\\DELL\\Desktop\\Projects\\Login__DashBoard\\src\\logIn_Dashboard\\Images\\Timesheet.png"));
+            frame.setIconImage(i);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
         project_details = new JLabel("Project Details");
         project_details.setFont(head_font);
         project_details.setBounds(650, 30, 300, 50);
@@ -48,6 +59,7 @@ public class Project_details {
         name_text = new JTextField();
         name_text.setBounds(40, 135, 1000, 30);
         name_text.setText(col1);
+        name_text.setBackground(Color.white);
         name_text.setEditable(false);
         name_text.setFont(text_font);
         panel.add(name_text);
@@ -60,6 +72,7 @@ public class Project_details {
         id_text = new JTextField();
         id_text.setBounds(40, 225, 500, 30);
         id_text.setText(col2);
+        id_text.setBackground(Color.white);
         id_text.setEditable(false);
         id_text.setFont(text_font);
         panel.add(id_text);

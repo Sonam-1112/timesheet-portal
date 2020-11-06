@@ -1,11 +1,15 @@
 package logIn_Dashboard;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -39,6 +43,13 @@ public class Manager_Dashboard {
         frame.setBounds(0,0,screenSize.width, screenSize.height);
         panel.setSize(screenSize.width,screenSize.height);
 		
+        try {
+            BufferedImage i = ImageIO.read(new File("C:\\Users\\DELL\\Desktop\\Projects\\Login__DashBoard\\src\\logIn_Dashboard\\Images\\Timesheet.png"));
+            frame.setIconImage(i);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
         Date date = new Date();  
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");  
         formatter.format(date);  

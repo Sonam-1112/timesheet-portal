@@ -1,11 +1,15 @@
 package logIn_Dashboard;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -35,6 +39,13 @@ public class SignUp_Form {
         frame.setSize(400,400);
         panel.setSize(300,300);
         frame.setResizable(false);
+        
+        try {
+            BufferedImage i = ImageIO.read(new File("C:\\Users\\DELL\\Desktop\\Projects\\Login__DashBoard\\src\\logIn_Dashboard\\Images\\Timesheet.png"));
+            frame.setIconImage(i);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         newuser = new JLabel("Username");
         newuser.setBounds(30,50,100,25);
